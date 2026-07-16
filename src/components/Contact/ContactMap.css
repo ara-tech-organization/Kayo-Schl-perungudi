@@ -60,6 +60,25 @@
   font-size: 0.88rem;
 }
 
+@media (max-width: 575.98px) {
+  .contact-map {
+    padding-bottom: 80px;
+  }
+  .contact-map__iframe {
+    height: 300px;
+  }
+  .contact-map__card {
+    margin: -36px 14px 0;
+    padding: 18px 20px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .contact-map__iframe {
+    height: 340px;
+  }
+}
+
 @media (min-width: 768px) {
   .contact-map__iframe {
     height: 440px;
@@ -71,5 +90,20 @@
     bottom: 28px;
     margin: 0;
     max-width: 340px;
+  }
+}
+
+@media (min-width: 992px) {
+  .contact-map {
+    padding-bottom: 130px;
+  }
+  .contact-map__iframe {
+    height: 480px;
+  }
+  .contact-map__card {
+    left: 56px;
+    bottom: 36px;
+    max-width: 380px;
+    padding: 26px 28px;
   }
 }

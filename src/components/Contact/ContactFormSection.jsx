@@ -33,59 +33,61 @@ export default function ContactFormSection() {
             <span className="eyebrow">Main Branch</span>
             <h2>Our Perungudi Campus</h2>
 
-            <div className="contact-info__point">
-              <span>
-                <MapPin strokeWidth={1.8} />
-              </span>
-              <div>
-                <strong>Address</strong>
-                <p>No.3, 1st Cross Street, Rajiv Nagar, Perungudi, Chennai &ndash; 600096</p>
+            <div className="contact-info__points">
+              <div className="contact-info__point">
+                <span>
+                  <MapPin strokeWidth={1.8} />
+                </span>
+                <div>
+                  <strong>Address</strong>
+                  <p>No.3, 1st Cross Street, Rajiv Nagar, Perungudi, Chennai &ndash; 600096</p>
+                </div>
               </div>
-            </div>
 
-            <div className="contact-info__point">
-              <span>
-                <Phone strokeWidth={1.8} />
-              </span>
-              <div>
-                <strong>Phone</strong>
-                <p>
-                  <a href="tel:+919884004650">+91 98840 04650</a>
-                </p>
+              <div className="contact-info__point">
+                <span>
+                  <Phone strokeWidth={1.8} />
+                </span>
+                <div>
+                  <strong>Phone</strong>
+                  <p>
+                    <a href="tel:+919884004650">+91 98840 04650</a>
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="contact-info__point">
-              <span>
-                <Mail strokeWidth={1.8} />
-              </span>
-              <div>
-                <strong>Email</strong>
-                <p>
-                  <a href="mailto:chnperungudi@kayointernational.in">
-                    chnperungudi@kayointernational.in
-                  </a>
-                </p>
+              <div className="contact-info__point">
+                <span>
+                  <Mail strokeWidth={1.8} />
+                </span>
+                <div>
+                  <strong>Email</strong>
+                  <p>
+                    <a href="mailto:chnperungudi@kayointernational.in">
+                      chnperungudi@kayointernational.in
+                    </a>
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div className="contact-info__point">
-              <span>
-                <Clock3 strokeWidth={1.8} />
-              </span>
-              <div>
-                <strong>Preschool Hours</strong>
-                <p>Monday to Saturday &mdash; 9:00 AM to 6:00 PM</p>
+              <div className="contact-info__point">
+                <span>
+                  <Clock3 strokeWidth={1.8} />
+                </span>
+                <div>
+                  <strong>Preschool Hours</strong>
+                  <p>Monday to Saturday &mdash; 9:00 AM to 6:00 PM</p>
+                </div>
               </div>
-            </div>
 
-            <div className="contact-info__point">
-              <span>
-                <CalendarClock strokeWidth={1.8} />
-              </span>
-              <div>
-                <strong>Campus Tour Timing</strong>
-                <p>Monday to Saturday &mdash; 10:00 AM to 5:00 PM (by appointment)</p>
+              <div className="contact-info__point">
+                <span>
+                  <CalendarClock strokeWidth={1.8} />
+                </span>
+                <div>
+                  <strong>Campus Tour Timing</strong>
+                  <p>Monday to Saturday &mdash; 10:00 AM to 5:00 PM (by appointment)</p>
+                </div>
               </div>
             </div>
           </div>

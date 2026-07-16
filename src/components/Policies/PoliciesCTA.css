@@ -1,5 +1,5 @@
 .pol-cta {
-  padding: 90px 0 110px;
+  padding: 56px 0 64px;
   background: var(--color-bg);
 }
 
@@ -116,7 +116,23 @@
   color: var(--color-primary-dark);
 }
 
+@media (min-width: 576px) {
+  .pol-cta {
+    padding: 68px 0 80px;
+  }
+}
+
+@media (min-width: 768px) {
+  .pol-cta {
+    padding: 80px 0 96px;
+  }
+}
+
 @media (min-width: 992px) {
+  .pol-cta {
+    padding: 90px 0 110px;
+  }
+
   .pol-cta__grid {
     grid-template-columns: 1.1fr 0.9fr;
     align-items: center;

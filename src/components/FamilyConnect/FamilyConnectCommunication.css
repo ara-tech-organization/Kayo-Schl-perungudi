@@ -12,13 +12,12 @@
 @media (min-width: 992px) {
   .fc-comm {
     padding: 100px 0;
-    margin-left: 100px;
   }
 }
 
 .fc-comm__grid {
   display: grid;
-  gap: 100px;
+  gap: 32px;
   margin-top: 8px;
 }
 
@@ -62,6 +61,13 @@
 .fc-comm__phone-frame::after {
   top: 134px;
   height: 56px;
+}
+
+@media (min-width: 576px) {
+  .fc-comm__phone-frame {
+    width: 250px;
+    height: 542px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -110,7 +116,26 @@
   gap: 11px;
 }
 
+.fc-comm__phone-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.fc-comm__phone-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(10, 8, 14, 0.3) 0%, rgba(10, 8, 14, 0.68) 55%, rgba(10, 8, 14, 0.88) 100%);
+}
+
 .fc-comm__bubble {
+  position: relative;
+  z-index: 2;
   align-self: flex-start;
   max-width: 84%;
   padding: 10px 13px;
@@ -190,5 +215,8 @@
   .fc-comm__grid {
     grid-template-columns: 300px minmax(0, 540px);
     align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+    gap: 100px;
   }
 }

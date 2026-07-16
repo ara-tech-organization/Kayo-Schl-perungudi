@@ -59,11 +59,23 @@ export default function FamilyConnectHero() {
           participants in their child&rsquo;s growth and development.
         </motion.p>
 
+        <motion.p
+          className="fc-hero__lead"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, delay: 0.22, ease: EASE }}
+        >
+          Research consistently shows that when families are involved in preschool education,
+          children develop stronger social skills, higher self-confidence, and better academic
+          outcomes. That is why we have designed our Family Connect programme to be one of the
+          most comprehensive parent involvement preschool Chennai has to offer.
+        </motion.p>
+
         <motion.div
           className="fc-hero__highlights"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.26, ease: EASE }}
+          transition={{ duration: 0.75, delay: 0.32, ease: EASE }}
         >
           {HIGHLIGHTS.map((h, i) => (
             <span className="fc-hero__chip" key={h.label} style={{ "--i": i }}>
@@ -78,7 +90,7 @@ export default function FamilyConnectHero() {
           className="btn btn-primary fc-hero__cta"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, delay: 0.34, ease: EASE }}
+          transition={{ duration: 0.75, delay: 0.4, ease: EASE }}
         >
           Book a Visit
         </motion.a>

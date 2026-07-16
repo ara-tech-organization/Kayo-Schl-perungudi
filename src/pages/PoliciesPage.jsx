@@ -1,6 +1,7 @@
 import PageLayout from "../components/layout/PageLayout";
 import PoliciesHero from "../components/Policies/PoliciesHero";
-import PoliciesGrid from "../components/Policies/PoliciesGrid";
+import PoliciesJourney from "../components/Policies/PoliciesJourney";
+import PoliciesCarousel from "../components/Policies/PoliciesCarousel";
 import PoliciesProhibited from "../components/Policies/PoliciesProhibited";
 import PoliciesCTA from "../components/Policies/PoliciesCTA";
 import { POLICIES_GROUP_ONE, POLICIES_GROUP_TWO } from "../components/Policies/policiesData";
@@ -30,13 +31,12 @@ export default function PoliciesPage() {
   return (
     <PageLayout>
       <PoliciesHero />
-      <PoliciesGrid
+      <PoliciesJourney
         id="policies"
         items={POLICIES_GROUP_ONE}
         eyebrow="How We Care for Your Child"
         title="Everyday Policies, Built on Trust"
         description="From the very first day to every routine in between, here is how we keep your child safe, comfortable, and cared for."
-        variant="sunrise"
         summaryTitle="A calm, safety-first start to every school day."
         summaryPoints={[
           "Gentle settling-in support for new children",
@@ -45,12 +45,11 @@ export default function PoliciesPage() {
         ]}
       />
       <PoliciesProhibited />
-      <PoliciesGrid
+      <PoliciesCarousel
         items={POLICIES_GROUP_TWO}
         eyebrow="How We Support Daily Wellbeing"
         title="Inclusion, Health & Family Partnership"
         description="These everyday policies help us support each child with consistency, kindness, and close communication with families."
-        variant="meadow"
         summaryTitle="Practical routines that help children feel supported."
         summaryPoints={[
           "Inclusive care for every child and family",

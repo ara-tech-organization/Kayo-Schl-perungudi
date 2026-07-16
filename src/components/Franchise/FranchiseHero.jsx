@@ -1,7 +1,9 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Home, ShieldCheck, TrendingUp, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./FranchiseHero.css";
+import heroBg from "../../assets/francisses.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -12,8 +14,16 @@ const HIGHLIGHTS = [
 ];
 
 export default function FranchiseHero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-18%", "18%"]);
+
   return (
-    <section className="fr-hero">
+    <section className="fr-hero" ref={ref}>
+      <div className="fr-hero__bg" aria-hidden="true">
+        <motion.img src={heroBg} alt="" className="fr-hero__bg-img" style={{ y: bgY }} />
+        <span className="fr-hero__bg-overlay" />
+      </div>
       <div className="fr-hero__backdrop" aria-hidden="true">
         <span className="fr-hero__blob fr-hero__blob--a" />
         <span className="fr-hero__blob fr-hero__blob--b" />

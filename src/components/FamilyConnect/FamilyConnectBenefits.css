@@ -5,6 +5,12 @@
   overflow: hidden;
 }
 
+@media (min-width: 576px) {
+  .fc-benefits {
+    padding: 72px 0 60px;
+  }
+}
+
 @media (min-width: 768px) {
   .fc-benefits {
     padding: 84px 0 68px;

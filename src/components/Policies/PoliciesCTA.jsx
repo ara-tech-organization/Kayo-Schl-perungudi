@@ -43,7 +43,7 @@ export default function PoliciesCTA() {
                 <MapPin strokeWidth={1.8} />
               </span>
               <div>
-                <strong>Perungudi, Chennai OMR</strong>
+                <strong>No.3, 1st Cross Street, Rajiv Nagar, Perungudi, Chennai - 600096</strong>
                 <p>Open for guided visits every day</p>
               </div>
             </div>

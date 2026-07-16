@@ -33,7 +33,7 @@ export default function EnquiryCTA() {
               </span>
               <div>
                 <strong>Visit Our Campus</strong>
-                <p>Perungudi, Chennai OMR</p>
+                <p>No.3, 1st Cross Street, Rajiv Nagar, Perungudi, Chennai - 600096</p>
               </div>
             </div>
             <div className="enquiry__point">

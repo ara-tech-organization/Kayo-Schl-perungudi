@@ -10,6 +10,7 @@ import {
   Smile,
   UserCheck,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import SectionHeading from "../common/SectionHeading";
 import Reveal from "../common/Reveal";
 import "./FamilyConnectResources.css";
@@ -51,7 +52,15 @@ export default function FamilyConnectResources() {
         <SectionHeading
           eyebrow="Information at Your Fingertips"
           title="Parent Resources"
-          description="We encourage all families to review our Kayo Policies, which outline important guidelines across several key areas."
+          description={
+            <>
+              We encourage all families to review our{" "}
+              <Link to="/policies" className="fc-resources__policy-link">
+                Kayo Policies page
+              </Link>
+              , which outlines important guidelines across several key areas.
+            </>
+          }
         />
 
         <div className="fc-resources__grid">

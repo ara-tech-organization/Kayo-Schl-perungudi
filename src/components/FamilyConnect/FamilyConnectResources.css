@@ -3,6 +3,24 @@
   background: var(--color-bg);
 }
 
+@media (min-width: 576px) {
+  .fc-resources {
+    padding: 72px 0;
+  }
+}
+
+.fc-resources__policy-link {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--dur-fast) var(--ease-premium);
+}
+
+.fc-resources__policy-link:hover {
+  color: var(--color-primary);
+}
+
 @media (min-width: 768px) {
   .fc-resources {
     padding: 84px 0;

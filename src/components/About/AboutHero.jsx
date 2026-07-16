@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Award, Heart, Home, MapPin, Sparkles, Star, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./AboutHero.css";
+import aboutHeroImg from "../../assets/About2.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -80,12 +81,11 @@ export default function AboutHero() {
           <span className="about-hero__orbit about-hero__orbit--inner" />
 
           <div className="about-hero__core">
-            <Heart size={44} strokeWidth={1.3} />
-            <span className="about-hero__core-label">Kayo International</span>
-            <span className="sr-only">
-              Bright nurturing classroom environment at Kayo International Preschool and DayCare
-              Chennai
-            </span>
+            <img
+              src={aboutHeroImg}
+              alt="Bright nurturing classroom environment at Kayo International Preschool and DayCare Chennai"
+              className="about-hero__core-img"
+            />
           </div>
 
           {SATELLITES.map((s, i) => (

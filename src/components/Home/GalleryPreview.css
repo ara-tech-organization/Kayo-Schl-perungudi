@@ -210,8 +210,8 @@
   position: absolute;
   top: 0;
   left: 50%;
-  width: 220px;
-  margin-left: -110px;
+  width: 280px;
+  margin-left: -140px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -236,6 +236,13 @@
 
 .gallery-preview__card.is-active .gallery-preview__art {
   box-shadow: 0 40px 70px -24px rgba(38, 35, 29, 0.4);
+}
+
+.gallery-preview__art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .gallery-preview__caption {
@@ -290,7 +297,7 @@
     height: 400px;
   }
   .gallery-preview__card {
-    width: 260px;
-    margin-left: -130px;
+    width: 320px;
+    margin-left: -160px;
   }
 }

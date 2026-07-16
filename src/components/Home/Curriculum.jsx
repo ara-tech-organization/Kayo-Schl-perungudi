@@ -1,8 +1,8 @@
 import { Blocks, Brain, FlaskConical, Palette } from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
 import { StaggerGroup, StaggerItem } from "../common/Stagger";
-import ArtPanel from "../common/ArtPanel";
 import "./Curriculum.css";
+import curriculumImg from "../../assets/home.png";
 
 const PILLARS = [
   {
@@ -33,7 +33,7 @@ export default function Curriculum() {
       <div className="curriculum__bg" aria-hidden="true" />
       <div className="container curriculum__grid">
         <div className="curriculum__visual">
-          <ArtPanel tone="secondary" icon={Brain} label="The NURTURE Lab Curriculum" tilt={false} />
+          <img src={curriculumImg} alt="The NURTURE Lab Curriculum" className="curriculum__visual-img" />
         </div>
 
         <div className="curriculum__content">

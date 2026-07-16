@@ -5,9 +5,10 @@ import Programmes from "../components/Home/Programmes";
 import Curriculum from "../components/Home/Curriculum";
 import Testimonials from "../components/Home/Testimonials";
 import Ratings from "../components/Home/Ratings";
-import GalleryPreview from "../components/Home/GalleryPreview";
 import FAQ from "../components/Home/FAQ";
 import EnquiryCTA from "../components/Home/EnquiryCTA";
+import OurTeam from "../components/About/OurTeam";
+import homeTeamImage from "../assets/2.png";
 import useSeo from "../hooks/useSeo";
 
 export default function HomePage() {
@@ -25,7 +26,10 @@ export default function HomePage() {
       <Curriculum />
       <Testimonials />
       <Ratings />
-      <GalleryPreview />
+      <OurTeam
+        imageSrc={homeTeamImage}
+        imageAlt="Kayo International team engaging with families and children on campus"
+      />
       <FAQ />
       <EnquiryCTA />
     </PageLayout>

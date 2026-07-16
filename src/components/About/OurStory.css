@@ -18,9 +18,9 @@
 /* Replace src in OurStory.jsx with the real photo path when ready. */
 .our-story__bg-image {
   position: absolute;
-  inset: -12% 0;
+  inset: -20% 0;
   width: 100%;
-  height: 124%;
+  height: 140%;
   object-fit: cover;
   object-position: center;
   background: var(--color-bg-alt);
@@ -30,7 +30,23 @@
 .our-story__bg-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--color-bg) 0%, transparent 22%, transparent 78%, var(--color-bg) 100%);
+  background: rgba(10, 8, 14, 0.72);
+}
+
+.our-story .eyebrow {
+  color: var(--color-gold-light, #fff);
+}
+
+.our-story .eyebrow::before {
+  background: var(--color-gold-light, #fff);
+}
+
+.our-story__copy h2 {
+  color: #fff;
+}
+
+.our-story__prose p {
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .our-story__grid {

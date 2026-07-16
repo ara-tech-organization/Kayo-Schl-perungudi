@@ -1,49 +1,42 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Building2, Laptop2, Megaphone, PiggyBank, Wallet } from "lucide-react";
+import { Building2, Laptop2, Megaphone, PiggyBank, Receipt, Wallet } from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
 import Reveal from "../common/Reveal";
 import "./FranchiseInvestment.css";
-
-const EASE = [0.16, 1, 0.3, 1];
 
 const INVESTMENT = [
   {
     icon: Wallet,
     title: "Franchise Fee",
-    short: "Franchise Fee",
     text: "One-time, with no recurring royalty.",
+    tone: "primary",
   },
   {
     icon: Building2,
     title: "Infrastructure & Interiors",
-    short: "Infrastructure",
     text: "Centre design, child-safe furniture, learning materials, play equipment.",
+    tone: "secondary",
   },
   {
     icon: Laptop2,
     title: "Technology Setup",
-    short: "Technology",
     text: "CCTV systems, parent communication tools, administrative software.",
+    tone: "gold",
   },
   {
     icon: Megaphone,
     title: "Initial Marketing",
-    short: "Marketing",
     text: "Launch campaigns, local promotions, and digital presence.",
+    tone: "orange",
   },
   {
     icon: PiggyBank,
     title: "Working Capital",
-    short: "Working Capital",
     text: "For the first few months of operation.",
+    tone: "primary",
   },
 ];
 
 export default function FranchiseInvestment() {
-  const [active, setActive] = useState(0);
-  const item = INVESTMENT[active];
-
   return (
     <section className="fr-invest" id="investment">
       <span className="fr-invest__curve fr-invest__curve--top" aria-hidden="true" />
@@ -61,49 +54,40 @@ export default function FranchiseInvestment() {
           description="The total investment for a Kayo International preschool franchise varies based on location, property size, and local market conditions. Our investment framework typically covers:"
         />
 
-        <div className="fr-invest__tabs" role="tablist" aria-label="Investment components">
-          {INVESTMENT.map((i, idx) => (
-            <button
-              key={i.title}
-              type="button"
-              role="tab"
-              aria-selected={active === idx}
-              className={`fr-invest__tab ${active === idx ? "is-active" : ""}`}
-              onClick={() => setActive(idx)}
-            >
-              <i.icon size={16} strokeWidth={2} />
-              {i.short}
-            </button>
-          ))}
-        </div>
+        <div className="fr-invest__receipt-wrap">
+          <span className="fr-invest__receipt-backing" aria-hidden="true" />
 
-        <div className="fr-invest__stage">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={item.title}
-              className="fr-invest__spotlight"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -18 }}
-              transition={{ duration: 0.45, ease: EASE }}
-            >
-              <span className="fr-invest__medallion">
-                <item.icon strokeWidth={1.5} />
+          <div className="fr-invest__receipt">
+            <div className="fr-invest__receipt-head">
+              <span className="fr-invest__receipt-icon">
+                <Receipt size={18} strokeWidth={1.8} />
               </span>
-              <div className="fr-invest__copy">
-                <span className="fr-invest__step">
-                  {String(active + 1).padStart(2, "0")} / {String(INVESTMENT.length).padStart(2, "0")}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
+              <div>
+                <strong>Investment Breakdown</strong>
+                <span>{INVESTMENT.length} components</span>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
 
-          <div className="fr-invest__dots" aria-hidden="true">
-            {INVESTMENT.map((i, idx) => (
-              <span key={i.title} className={active === idx ? "is-active" : ""} />
-            ))}
+            <ul className="fr-invest__list">
+              {INVESTMENT.map((item, i) => (
+                <Reveal
+                  as="li"
+                  y={14}
+                  delay={0.05 * i}
+                  key={item.title}
+                  className={`fr-invest__row fr-invest__row--${item.tone}`}
+                >
+                  <span className="fr-invest__row-icon">
+                    <item.icon strokeWidth={1.7} />
+                  </span>
+                  <div className="fr-invest__row-copy">
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </div>
+                  <span className="fr-invest__row-index">{String(i + 1).padStart(2, "0")}</span>
+                </Reveal>
+              ))}
+            </ul>
           </div>
         </div>
 

@@ -14,8 +14,8 @@
   position: relative;
   padding: 40px 28px;
   border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--color-orange-light) 0%, var(--color-gold-light) 100%);
-  border: 1px solid rgba(209, 89, 31, 0.16);
+  background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-bg-alt) 100%);
+  border: 1px solid color-mix(in srgb, var(--color-secondary-dark) 16%, transparent);
   box-shadow: var(--shadow-lift);
   overflow: hidden;
 }
@@ -24,7 +24,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 88% -10%, rgba(255, 255, 255, 0.55), transparent 55%);
+  background: radial-gradient(circle at 88% -10%, color-mix(in srgb, var(--color-surface) 55%, transparent), transparent 55%);
   pointer-events: none;
 }
 
@@ -37,7 +37,7 @@
   height: 62px;
   border-radius: 20px;
   background: var(--color-surface);
-  color: var(--color-orange-dark);
+  color: var(--color-secondary-dark);
   box-shadow: var(--shadow-soft);
   margin-bottom: 20px;
 }
@@ -49,12 +49,12 @@
 }
 
 .pol-prohibited__eyebrow {
-  color: var(--color-orange-dark);
+  color: var(--color-secondary-dark);
   margin-bottom: 4px;
 }
 
 .pol-prohibited__eyebrow::before {
-  background: var(--color-orange);
+  background: var(--color-secondary);
 }
 
 .pol-prohibited__copy h2 {
@@ -101,8 +101,8 @@
   width: 36px;
   height: 36px;
   border-radius: 12px;
-  background: var(--color-orange-light);
-  color: var(--color-orange-dark);
+  background: var(--color-secondary-light);
+  color: var(--color-secondary-dark);
 }
 
 @media (min-width: 576px) {

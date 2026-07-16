@@ -9,13 +9,12 @@ import {
   MessageCircle,
   Phone,
   ShieldCheck,
-  Smile,
   Sparkles,
   Star,
   Users,
 } from "lucide-react";
-import ArtPanel from "../common/ArtPanel";
 import "./Hero.css";
+import homeVideo from "../../assets/home.mp4";
 
 const MARQUEE_ITEMS = [
   { icon: Award, label: "20+ Awards Received" },
@@ -126,12 +125,16 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <ArtPanel
-            tone="primary"
-            icon={Smile}
-            label="Where Little Minds Flourish"
-            className="hero__visual-art"
-          />
+          <div className="hero__visual-art hero__visual-video">
+            <video
+              className="hero__visual-video-el"
+              src={homeVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </div>
 
           <motion.div
             className="hero__visual-badge hero__visual-badge--rating"

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Heart, Home, Mail, MessageCircle, Phone, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import contactImg from "../../assets/contact.png";
 import "./ContactHero.css";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -84,9 +85,11 @@ export default function ContactHero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
         >
-          <span className="contact-hero__core">
-            <MessageCircle size={40} strokeWidth={1.3} />
-          </span>
+          <img
+            src={contactImg}
+            alt="Happy children at KAYO International Preschool, Perungudi"
+            className="contact-hero__image"
+          />
 
           {CHANNELS.map((c, i) => (
             <motion.a

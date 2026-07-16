@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import SectionHeading from "../common/SectionHeading";
 import ArtPanel from "../common/ArtPanel";
 import "./GalleryPreview.css";
+import outdoorImg from "../../assets/Outdoor.png";
+import stemImg from "../../assets/STEM Activit.png";
 
 const IMAGES = [
   {
@@ -27,12 +29,14 @@ const IMAGES = [
   {
     tone: "secondary",
     icon: TreePine,
+    image: outdoorImg,
     caption: "Outdoor Play Area",
     alt: "Spacious outdoor play area with sandpit and splash pool at Kayo International Preschool Perungudi",
   },
   {
     tone: "gold",
     icon: FlaskConical,
+    image: stemImg,
     caption: "STEM Activities",
     alt: "Children engaged in STEM learning activities at Kayo International Preschool Chennai",
   },
@@ -202,7 +206,15 @@ export default function GalleryPreview() {
                 aria-current={isActive}
                 aria-label={img.caption}
               >
-                <ArtPanel tone={img.tone} icon={img.icon} tilt={isActive} pop={isActive} className="gallery-preview__art" />
+                {img.image ? (
+                  <img
+                    src={img.image}
+                    alt={img.alt}
+                    className="gallery-preview__art gallery-preview__art-img"
+                  />
+                ) : (
+                  <ArtPanel tone={img.tone} icon={img.icon} tilt={isActive} pop={isActive} className="gallery-preview__art" />
+                )}
                 <span className="gallery-preview__caption">{img.caption}</span>
                 <span className="sr-only">{img.alt}</span>
               </motion.button>

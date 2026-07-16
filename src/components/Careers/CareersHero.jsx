@@ -1,36 +1,52 @@
 import { motion } from "framer-motion";
-import { Heart, Home, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { Home, ShieldCheck, Sparkles, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import heroImage from "../../assets/1.png";
 import "./CareersHero.css";
 
 const EASE = [0.16, 1, 0.3, 1];
 
-const FLOAT_CARDS = [
-  { icon: Star, value: "4.9★", label: "Google Rating", tone: "gold", rotate: -7, top: "20%", left: "2%" },
-  {
-    icon: ShieldCheck,
-    value: "10+",
-    label: "Years Trusted",
-    tone: "primary",
-    rotate: 5,
-    top: "44%",
-    left: "48%",
-  },
-  {
-    icon: Heart,
-    value: "1st",
-    label: "Founder-Led Culture",
-    tone: "secondary",
-    rotate: -4,
-    top: "72%",
-    left: "12%",
-  },
+const BADGES = [
+  { icon: Star, value: "4.9★", label: "Google Rating", top: "10%", left: "-8%", rotate: -6 },
+  { icon: ShieldCheck, value: "10+", label: "Years Trusted", top: "72%", left: "58%", rotate: 5 },
 ];
 
 export default function CareersHero() {
   return (
     <section className="cr-hero">
       <div className="container cr-hero__inner">
+        <div className="cr-hero__visual" aria-hidden="true">
+          <span className="cr-hero__frame-backing" />
+
+          <div className="cr-hero__frame">
+            <img src={heroImage} alt="" className="cr-hero__frame-img" />
+            <span className="cr-hero__frame-tint" />
+          </div>
+
+          <span className="cr-hero__frame-tag">
+            <Sparkles size={13} strokeWidth={2.2} />
+            We're Hiring
+          </span>
+
+          {BADGES.map((b, i) => (
+            <motion.div
+              key={b.label}
+              className="cr-hero__badge"
+              style={{ top: b.top, left: b.left, "--badge-rotate": `${b.rotate}deg` }}
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 + i * 0.12, ease: EASE }}
+              whileHover={{ scale: 1.06 }}
+            >
+              <span className="cr-hero__badge-icon">
+                <b.icon strokeWidth={1.8} />
+              </span>
+              <strong>{b.value}</strong>
+              <span>{b.label}</span>
+            </motion.div>
+          ))}
+        </div>
+
         <div className="cr-hero__text">
           <nav className="cr-hero__crumb" aria-label="Breadcrumb">
             <Link to="/">
@@ -92,32 +108,6 @@ export default function CareersHero() {
               View Open Roles
             </a>
           </motion.div>
-        </div>
-
-        <div className="cr-hero__visual" aria-hidden="true">
-          <span className="cr-hero__glow" />
-          <span className="cr-hero__badge">
-            <Sparkles size={15} strokeWidth={2} />
-            We're Hiring
-          </span>
-
-          {FLOAT_CARDS.map((c, i) => (
-            <motion.div
-              key={c.label}
-              className={`cr-hero__float cr-hero__float--${c.tone}`}
-              style={{ top: c.top, left: c.left, rotate: `${c.rotate}deg` }}
-              initial={{ opacity: 0, scale: 0.7, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 + i * 0.14, ease: EASE }}
-              whileHover={{ scale: 1.08 }}
-            >
-              <span className="cr-hero__float-icon">
-                <c.icon strokeWidth={1.8} />
-              </span>
-              <strong>{c.value}</strong>
-              <span>{c.label}</span>
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>

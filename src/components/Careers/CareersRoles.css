@@ -1,7 +1,13 @@
 .cr-roles {
   position: relative;
-  padding: 8px 0 72px;
+  padding: 8px 0 56px;
   background: var(--color-bg);
+}
+
+@media (min-width: 576px) {
+  .cr-roles {
+    padding: 8px 0 64px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -138,8 +144,21 @@
   padding: 16px 24px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 576px) {
   .cr-roles__cloud {
     gap: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cr-roles__cloud {
+    margin-top: 52px;
+    gap: 18px;
+  }
+}
+
+@media (min-width: 992px) {
+  .cr-roles__cloud {
+    gap: 20px;
   }
 }

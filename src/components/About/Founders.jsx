@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { GraduationCap, Quote, Rocket, UserRound } from "lucide-react";
+import { GraduationCap, Quote, Rocket } from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
-import ArtPanel from "../common/ArtPanel";
 import "./Founders.css";
+import veenaImg from "../../assets/Veena.png";
+import sankaraImg from "../../assets/Sankara.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -13,6 +14,7 @@ const FOUNDERS = [
     role: "Founder & Director, M.A.",
     icon: GraduationCap,
     tone: "secondary",
+    image: veenaImg,
     alt: "Veena Sundaramurthy, founder of Kayo International Preschool, with children in classroom at Perungudi Chennai centre",
     tags: ["Early Childhood Education", "Child Psychology", "NURTURE Lab Curriculum"],
     quote:
@@ -28,6 +30,8 @@ const FOUNDERS = [
     role: "Co-Founder",
     icon: Rocket,
     tone: "secondary",
+    image: sankaraImg,
+    alt: "Sankara K, co-founder of Kayo International Preschool",
     tags: ["Bits Pilani", "EdTech Strategy", "Growth & Operations"],
     quote:
       "I partner with school leaders and help them think bigger — turning ambitious goals into reality.",
@@ -85,8 +89,7 @@ export default function Founders() {
                 style={{ pointerEvents: active === i ? "auto" : "none", zIndex: active === i ? 1 : 0 }}
               >
                 <div className="founders__art">
-                  <ArtPanel tone={f.tone} icon={UserRound} label={f.name} pop />
-                  {f.alt && <span className="sr-only">{f.alt}</span>}
+                  <img src={f.image} alt={f.alt || f.name} className="founders__art-img" />
                   <span className="founders__role-chip">
                     <f.icon size={15} strokeWidth={2} />
                     {f.role}

@@ -160,9 +160,21 @@
   font-size: 0.9rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 576px) {
+  .fc-events__ticket {
+    width: 260px;
+  }
+}
+
+@media (min-width: 768px) {
   .fc-events__ticket {
     width: 280px;
+  }
+}
+
+@media (min-width: 992px) {
+  .fc-events__ticket {
+    width: 300px;
   }
 }
 

@@ -3,15 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   ClipboardList,
   Compass,
-  HeartHandshake,
   Megaphone,
   NotebookPen,
   Plus,
   UsersRound,
 } from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
-import ArtPanel from "../common/ArtPanel";
 import "./FranchiseSupport.css";
+import supportImg from "../../assets/Francis.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -73,7 +72,7 @@ export default function FranchiseSupport() {
         />
 
         <div className="fr-support__art-wrap">
-          <ArtPanel tone="secondary" icon={HeartHandshake} label="We've Got You Covered" pop />
+          <img src={supportImg} alt="We've Got You Covered — Kayo International support team" className="fr-support__art-img" />
         </div>
 
         <div className="fr-support__accordion">

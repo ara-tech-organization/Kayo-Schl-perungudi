@@ -4,6 +4,7 @@ import { BadgeCheck, BookHeart, Briefcase, Sparkles } from "lucide-react";
 import Reveal from "../common/Reveal";
 import { StaggerGroup, StaggerItem } from "../common/Stagger";
 import "./OurStory.css";
+import ourStoryBg from "../../assets/About.png";
 
 const MILESTONES = [
   {
@@ -27,14 +28,14 @@ const MILESTONES = [
 export default function OurStory() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-18%", "18%"]);
 
   return (
     <section className="our-story" id="our-story" ref={ref}>
       <div className="our-story__bg">
         <motion.img
           className="our-story__bg-image"
-          src="/images/about/our-story-bg.jpg"
+          src={ourStoryBg}
           alt="Happy children engaged in Montessori STEM learning activities at Kayo International Preschool Chennai"
           style={{ y: bgY }}
         />

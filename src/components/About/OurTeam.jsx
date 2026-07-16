@@ -4,8 +4,8 @@ import { BookOpenCheck, GraduationCap, RefreshCcw, ShieldCheck } from "lucide-re
 import SectionHeading from "../common/SectionHeading";
 import { StaggerGroup, StaggerItem } from "../common/Stagger";
 import Reveal from "../common/Reveal";
-import ArtPanel from "../common/ArtPanel";
 import "./OurTeam.css";
+import teamImg from "../../assets/Team.png";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -32,7 +32,10 @@ const QUALITIES = [
   },
 ];
 
-export default function OurTeam() {
+export default function OurTeam({
+  imageSrc = teamImg,
+  imageAlt = "Qualified early years teachers at Kayo International Preschool",
+}) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const artY = useTransform(scrollYProgress, [0, 1], [-140, 140]);
@@ -92,7 +95,7 @@ export default function OurTeam() {
           transition={{ duration: 0.75, delay: 0.15, ease: EASE }}
           style={{ y: artY }}
         >
-          <ArtPanel tone="secondary" icon={GraduationCap} label="Our Qualified Educators" />
+          <img src={imageSrc} alt={imageAlt} className="our-team__art-img" />
           <span className="sr-only">
             Qualified early years teachers conducting interactive session at Kayo International
             Preschool Perungudi

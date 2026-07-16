@@ -1,0 +1,246 @@
+.pol-carousel {
+  position: relative;
+  padding: 64px 0 60px;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  overflow: hidden;
+}
+
+.pol-carousel__head {
+  display: grid;
+  gap: 24px;
+  max-width: 900px;
+}
+
+.pol-carousel__facts {
+  padding: 18px 22px;
+  border-radius: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.pol-carousel__facts-kicker {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-secondary-dark);
+  margin-bottom: 8px;
+}
+
+.pol-carousel__facts p {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: var(--color-ink);
+  margin-bottom: 10px;
+}
+
+.pol-carousel__facts ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.pol-carousel__facts li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.86rem;
+  color: var(--color-ink-soft);
+}
+
+.pol-carousel__facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-gold));
+}
+
+/* ---------- Controls ---------- */
+
+.pol-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 36px;
+  margin-bottom: 18px;
+}
+
+.pol-carousel__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.pol-carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-line);
+  cursor: pointer;
+  transition: width var(--dur-med) var(--ease-premium), background var(--dur-med) var(--ease-premium);
+}
+
+.pol-carousel__dot.is-active {
+  width: 26px;
+  border-radius: 5px;
+  background: var(--color-secondary-dark);
+}
+
+.pol-carousel__arrows {
+  display: flex;
+  gap: 10px;
+}
+
+.pol-carousel__arrow {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-premium), background var(--dur-fast) var(--ease-premium),
+    border-color var(--dur-fast) var(--ease-premium), color var(--dur-fast) var(--ease-premium);
+}
+
+.pol-carousel__arrow:hover {
+  transform: translateY(-3px);
+  background: var(--color-secondary-light);
+  border-color: transparent;
+  color: var(--color-secondary-dark);
+}
+
+/* ---------- Track ---------- */
+
+.pol-carousel__track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 6px 6px 16px;
+  margin: 0 -6px;
+  scrollbar-width: none;
+}
+
+.pol-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.pol-carousel__card {
+  --pol-soft: var(--color-primary-light);
+  --pol-strong: var(--color-primary-dark);
+  --pol-accent: var(--color-primary);
+  position: relative;
+  flex: 0 0 auto;
+  width: 78vw;
+  max-width: 320px;
+  padding: 28px 24px;
+  border-radius: 26px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: start;
+  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium);
+}
+
+.pol-carousel__card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lift);
+}
+
+.pol-carousel__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(90deg, var(--pol-accent), var(--pol-strong));
+}
+
+.pol-carousel__card-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 17px;
+  background: var(--pol-soft);
+  color: var(--pol-strong);
+  margin-bottom: 18px;
+}
+
+.pol-carousel__card-index {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--color-ink-faint);
+}
+
+.pol-carousel__card-tagline {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pol-strong);
+  margin-bottom: 8px;
+}
+
+.pol-carousel__card h3 {
+  font-size: 1.14rem;
+  margin-bottom: 10px;
+}
+
+.pol-carousel__card p {
+  font-size: 0.9rem;
+}
+
+.pol-carousel__card--secondary {
+  --pol-soft: var(--color-secondary-light);
+  --pol-strong: var(--color-secondary-dark);
+  --pol-accent: var(--color-secondary);
+}
+.pol-carousel__card--gold {
+  --pol-soft: var(--color-gold-light);
+  --pol-strong: var(--color-orange-dark);
+  --pol-accent: var(--color-gold);
+}
+.pol-carousel__card--orange {
+  --pol-soft: var(--color-orange-light);
+  --pol-strong: var(--color-orange-dark);
+  --pol-accent: var(--color-orange);
+}
+
+@media (min-width: 768px) {
+  .pol-carousel {
+    padding: 84px 0 76px;
+  }
+
+  .pol-carousel__head {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+  }
+
+  .pol-carousel__card {
+    width: 340px;
+  }
+}
+
+@media (min-width: 992px) {
+  .pol-carousel {
+    padding: 100px 0 88px;
+  }
+}

@@ -2,8 +2,13 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BookOpenCheck, ChevronRight, Home as HomeIcon, PenTool, PuzzleIcon, Rocket } from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
-import ArtPanel from "../common/ArtPanel";
 import "./Programmes.css";
+import playgroupImg from "../../assets/Play group.png";
+import nurseryImg from "../../assets/Nursery.png";
+import lkgImg from "../../assets/LKG.png";
+import ukgImg from "../../assets/UKG.png";
+import primaryImg from "../../assets/Primary.png";
+import dayCareImg from "../../assets/Day Care.png";
 
 const PROGRAMMES = [
   {
@@ -11,6 +16,7 @@ const PROGRAMMES = [
     tone: "primary",
     age: "1.5 to 3 Years",
     title: "Playgroup",
+    image: playgroupImg,
     text: "Our gentle playgroup programme introduces toddlers to a structured yet joyful learning environment. Through sensory play, music, movement, and social interaction, your little one builds confidence, language skills, and early cognitive abilities — all while feeling safe and loved.",
   },
   {
@@ -18,6 +24,7 @@ const PROGRAMMES = [
     tone: "secondary",
     age: "3 to 4 Years",
     title: "Nursery",
+    image: nurseryImg,
     text: "In our nursery programme, children dive deeper into structured learning through the Montessori approach. Practical life skills, early numeracy, pre-writing activities, and language development form the core of this enriching year.",
   },
   {
@@ -25,6 +32,7 @@ const PROGRAMMES = [
     tone: "gold",
     age: "4 to 5 Years",
     title: "LKG",
+    image: lkgImg,
     text: "Our LKG programme strengthens foundational literacy and numeracy through hands-on, play-based learning. Children explore science concepts, develop fine motor skills, and build the social confidence needed for formal schooling.",
   },
   {
@@ -32,6 +40,7 @@ const PROGRAMMES = [
     tone: "orange",
     age: "5 to 6 Years",
     title: "UKG",
+    image: ukgImg,
     text: "The final preschool year at Kayo International ensures your child is fully prepared for primary school. Our UKG programme emphasises reading fluency, mathematical thinking, scientific curiosity, and independent learning — giving them a head start in life.",
   },
   {
@@ -39,6 +48,7 @@ const PROGRAMMES = [
     tone: "primary",
     age: "6 to 12 Years",
     title: "Primary Enrichment Programme",
+    image: primaryImg,
     text: "Our enrichment programme for 6 to 12 year olds keeps learning alive beyond the classroom. Through activity-based sessions, critical thinking exercises, and creative projects, children build communication, digital literacy, and problem-solving skills.",
   },
   {
@@ -46,6 +56,7 @@ const PROGRAMMES = [
     tone: "secondary",
     age: "6 Months Onwards",
     title: "Day Care",
+    image: dayCareImg,
     text: "We understand the challenges of working parents. Our daycare in OMR Chennai provides a safe, nurturing home-away-from-home for babies as young as 6 months, with caring attendants, age-appropriate activities, nutritious meals, and restful nap times.",
   },
 ];
@@ -96,7 +107,11 @@ export default function Programmes() {
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="programmes__showcase-visual">
-                  <ArtPanel tone={current.tone} icon={current.icon} tilt={false} />
+                  <img
+                    src={current.image}
+                    alt={current.title}
+                    className="programmes__showcase-img"
+                  />
                 </div>
                 <div className="programmes__showcase-body">
                   <span className="programmes__age">{current.age}</span>
