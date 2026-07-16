@@ -9,9 +9,9 @@ const LINKS = [
   { to: "/", label: "Home" },
   {
     label: "About",
-    to: "/about",
+    to: "/about-us",
     children: [
-      { to: "/about", label: "Our Story" },
+      { to: "/about-us", label: "Our Story" },
       { to: "/curriculum", label: "Curriculum" },
       { to: "/franchise", label: "Franchise" },
     ],

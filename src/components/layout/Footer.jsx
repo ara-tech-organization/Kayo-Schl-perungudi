@@ -90,7 +90,7 @@ export default function Footer() {
         <div className="footer__col">
           <h4>Explore</h4>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About Us</NavLink>
+          <NavLink to="/about-us">About Us</NavLink>
           <NavLink to="/curriculum">Curriculum</NavLink>
           <NavLink to="/services">Programmes</NavLink>
           <NavLink to="/gallery">Gallery</NavLink>
