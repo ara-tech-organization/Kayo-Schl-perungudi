@@ -1,291 +1,418 @@
-/* xs — base/mobile styles (<480px) */
-.our-story {
+/* ==========================================================================
+   Our Story — bright magazine intro + winding journey roadmap
+   ========================================================================== */
+.story {
   position: relative;
-  padding: 64px 0;
-  background: var(--color-bg);
+  padding: var(--section-pad) 0;
   overflow: hidden;
   isolation: isolate;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
 }
 
-.our-story__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+.story__inner {
+  position: relative;
+  z-index: 1;
 }
 
-/* Replace src in OurStory.jsx with the real photo path when ready. */
-.our-story__bg-image {
-  position: absolute;
-  inset: -20% 0;
+/* ---- Magazine intro: blob-masked photo + copy ---- */
+.story__intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 44px;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.story__figure {
+  position: relative;
   width: 100%;
-  height: 140%;
-  object-fit: cover;
-  object-position: center;
-  background: var(--color-bg-alt);
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
   will-change: transform;
 }
 
-.our-story__bg-overlay {
+/* Offset dashed frame peeking behind the organic photo */
+.story__figure-frame {
+  position: absolute;
+  inset: 8% -6% -8% 8%;
+  border: 2px dashed var(--color-secondary);
+  border-radius: 58% 42% 55% 45% / 55% 45% 62% 38%;
+  opacity: 0.55;
+}
+
+.story__figure-mask {
   position: absolute;
   inset: 0;
-  background: rgba(10, 8, 14, 0.72);
-}
-
-.our-story .eyebrow {
-  color: var(--color-gold-light, #fff);
-}
-
-.our-story .eyebrow::before {
-  background: var(--color-gold-light, #fff);
-}
-
-.our-story__copy h2 {
-  color: #fff;
-}
-
-.our-story__prose p {
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.our-story__grid {
-  position: relative;
-  z-index: 1;
-  max-width: 1120px;
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
-}
-
-.our-story__copy {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  text-align: center;
-}
-
-.our-story__copy h2 {
-  font-size: clamp(1.6rem, 6vw, 2.6rem);
-  max-width: 20ch;
-  margin: 6px auto 16px;
-}
-
-.our-story__prose {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  text-align: center;
-  width: 100%;
-}
-
-.our-story__prose p {
-  font-size: 0.94rem;
-  max-width: 68ch;
-}
-
-.our-story__timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding-left: 30px;
-}
-
-.our-story__timeline::before {
-  content: "";
-  position: absolute;
-  left: 15px;
-  top: 18px;
-  bottom: 18px;
-  width: 2px;
-  background: var(--color-line);
-}
-
-.our-story__milestone {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: left;
-  padding: 14px 16px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-line-soft);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
-  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium),
-    border-color var(--dur-med) var(--ease-premium);
-}
-
-.our-story__milestone::before {
-  content: "";
-  position: absolute;
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--color-secondary);
-  box-shadow: 0 0 0 4px var(--color-bg);
-}
-
-.our-story__milestone:hover {
-  transform: translateX(4px);
+  overflow: hidden;
+  border-radius: 62% 38% 55% 45% / 55% 45% 62% 38%;
+  border: 6px solid var(--color-surface);
   box-shadow: var(--shadow-lift);
-  border-color: transparent;
+  animation: story-blob 14s ease-in-out infinite;
 }
 
-.our-story__milestone span {
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 11px;
-  display: grid;
-  place-items: center;
-  background: var(--color-secondary-light);
+@keyframes story-blob {
+  0%, 100% { border-radius: 62% 38% 55% 45% / 55% 45% 62% 38%; }
+  33% { border-radius: 45% 55% 62% 38% / 38% 62% 45% 55%; }
+  66% { border-radius: 55% 45% 38% 62% / 62% 38% 55% 45%; }
+}
+
+.story__figure-img {
+  width: 100%;
+  height: 124%;
+  margin-top: -12%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+
+.story__figure-chip {
+  position: absolute;
+  right: -6px;
+  bottom: 6%;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lift);
+  border: 1px solid var(--color-line-soft);
+  font-weight: 700;
+  font-size: 0.82rem;
   color: var(--color-secondary-dark);
 }
 
-.our-story__milestone span svg {
-  width: 15px;
-  height: 15px;
+.story__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
 }
 
-.our-story__milestone p {
-  font-size: 0.86rem;
-  font-weight: 600;
+.story__copy h2 {
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+  max-width: 22ch;
+  margin: 6px auto 6px;
+  line-height: 1.16;
+}
+
+.story__mark {
+  position: relative;
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+}
+
+.story__mark::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  bottom: 3px;
+  height: 34%;
+  z-index: -1;
+  background: var(--color-secondary-light);
+  border-radius: 6px;
+  transform: rotate(-1.2deg);
+}
+
+.story__copy p {
+  font-size: 0.96rem;
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* ---- Journey roadmap ---- */
+.story__journey {
+  position: relative;
+}
+
+.story__journey-label {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+/* ==========================================================================
+   Journey — a playful winding "adventure road"
+   Mobile: a vertical candy road on the left, stops stacked.
+   Desktop (≥900px): a horizontal road with bouncing stops + pop-out cards.
+   ========================================================================== */
+.story__trail {
+  position: relative;
+  padding-left: 60px;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+/* The road itself — a rounded multi-colour band with dashed "lane markings" */
+.story__trail-rail {
+  position: absolute;
+  left: 20px;
+  top: 12px;
+  bottom: 12px;
+  width: 12px;
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0 12px, transparent 12px 26px)
+      center / 3px 100% no-repeat,
+    linear-gradient(180deg, var(--color-orange) 0%, var(--color-primary) 36%, var(--color-gold) 68%, var(--color-secondary) 100%);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Start / Finish markers */
+.story__flag {
+  position: absolute;
+  left: 6px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px 5px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  box-shadow: var(--shadow-soft);
+  white-space: nowrap;
+}
+
+.story__flag--start {
+  top: -14px;
+  transform: translateX(-6px);
+}
+
+.story__flag--end {
+  bottom: -14px;
+  left: 8px;
+  padding: 8px;
+  background: var(--color-secondary-dark);
+}
+
+.story__stop {
+  --tone: var(--color-primary);
+  --tone-soft: var(--color-primary-light);
+  position: relative;
+  margin-bottom: 26px;
+  will-change: transform;
+}
+
+.story__stop:last-child {
+  margin-bottom: 0;
+}
+
+/* Bouncing icon "stop" seated on the road */
+.story__stop-dot {
+  position: absolute;
+  left: -46px;
+  top: 14px;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--tone);
+  color: #fff;
+  border: 4px solid var(--color-surface);
+  box-shadow: var(--shadow-lift);
+  z-index: 2;
+  will-change: transform;
+}
+
+/* Little dashed twig linking the stop to its card */
+.story__stop::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 36px;
+  width: 12px;
+  border-top: 3px dashed var(--tone);
+  opacity: 0.7;
+}
+
+.story__stop-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 22px;
+  background: var(--color-surface);
+  border: 2px solid var(--tone);
+  border-radius: var(--radius-md);
+  box-shadow: 6px 8px 0 -1px var(--tone-soft);
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium);
+}
+
+.story__stop:nth-child(odd) .story__stop-card { --tilt: -1.2deg; }
+.story__stop:nth-child(even) .story__stop-card { --tilt: 1.2deg; }
+
+.story__stop:hover .story__stop-card {
+  transform: rotate(0deg) translateX(6px);
+  box-shadow: 10px 12px 0 -1px var(--tone-soft);
+}
+
+/* Big translucent ghost number */
+.story__stop-num {
+  position: absolute;
+  top: -6px;
+  right: 10px;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--tone-soft);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.story__stop-year {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   color: var(--color-ink);
+  margin-bottom: 4px;
+}
+
+.story__stop-card p {
+  position: relative;
+  z-index: 1;
+  font-size: 0.92rem;
   margin: 0;
+  max-width: 46ch;
 }
 
-/* sm — ≥576px */
-@media (min-width: 576px) {
-  .our-story {
-    padding: 80px 0;
-  }
+/* Tone mapping */
+.story__stop--primary { --tone: var(--color-primary); --tone-soft: var(--color-primary-light); }
+.story__stop--secondary { --tone: var(--color-secondary); --tone-soft: var(--color-secondary-light); }
+.story__stop--gold { --tone: var(--color-gold); --tone-soft: var(--color-gold-light); }
+.story__stop--orange { --tone: var(--color-orange); --tone-soft: var(--color-orange-light); }
 
-  .our-story__grid {
-    gap: 40px;
-  }
-
-  .our-story__prose p {
-    font-size: 1rem;
-  }
-
-  .our-story__timeline {
-    padding-left: 34px;
-    gap: 22px;
-  }
-
-  .our-story__timeline::before {
-    left: 19px;
-    top: 20px;
-    bottom: 20px;
-  }
-
-  .our-story__milestone {
-    padding: 18px 20px;
-    gap: 14px;
-  }
-
-  .our-story__milestone::before {
-    left: -34px;
-    width: 10px;
-    height: 10px;
-  }
-
-  .our-story__milestone span {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-  }
-
-  .our-story__milestone span svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .our-story__milestone p {
-    font-size: 0.92rem;
-  }
-}
-
-/* md — ≥768px */
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
 @media (min-width: 768px) {
-  .our-story {
-    padding: 96px 0;
+  .story__intro {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
   }
-
-  .our-story__timeline {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px 20px;
-    padding-left: 0;
+  .story__figure {
+    margin-inline: 0;
   }
-
-  .our-story__timeline > div {
-    height: 100%;
+  .story__copy {
+    text-align: left;
   }
-
-  .our-story__timeline::before {
-    display: none;
-  }
-
-  .our-story__milestone {
-    align-items: flex-start;
-    height: 100%;
-  }
-
-  .our-story__milestone::before {
-    display: none;
+  .story__copy h2,
+  .story__copy p {
+    margin-inline: 0;
   }
 }
 
-/* lg — ≥992px */
-@media (min-width: 992px) {
-  .our-story {
-    padding: 110px 0;
+/* ---- Desktop: horizontal winding road with pop-out cards ---- */
+@media (min-width: 900px) {
+  .story__trail {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 22px;
+    padding: 66px 4% 58px;
+    max-width: none;
+    margin-inline: 0;
   }
 
-  .our-story__grid {
-    grid-template-columns: 1.05fr 0.95fr;
+  /* Road turns horizontal, keeps the colourful band + dashed lane markings */
+  .story__trail-rail {
+    left: 4%;
+    right: 4%;
+    top: 50%;
+    bottom: auto;
+    width: auto;
+    height: 12px;
+    transform: translateY(-50%);
+    background:
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.9) 0 14px, transparent 14px 30px)
+        center / 100% 3px no-repeat,
+      linear-gradient(90deg, var(--color-orange) 0%, var(--color-primary) 36%, var(--color-gold) 68%, var(--color-secondary) 100%);
+  }
+
+  .story__flag {
+    top: 50%;
+    left: 0.5%;
+    transform: translateY(-50%);
+  }
+  .story__flag--start {
+    transform: translateY(-50%);
+  }
+  .story__flag--end {
+    left: auto;
+    right: 0.5%;
+    bottom: auto;
+  }
+
+  /* Each stop: card / marker / card stacked so all markers land on the road */
+  .story__stop {
+    margin: 0;
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+    justify-items: center;
     align-items: center;
-    gap: 60px;
+    row-gap: 16px;
   }
 
-  .our-story__copy {
-    text-align: left;
+  .story__stop::before {
+    display: none;
   }
 
-  .our-story__copy h2 {
-    margin: 6px 0 20px;
+  .story__stop-dot {
+    position: relative;
+    left: auto;
+    top: auto;
+    grid-row: 2;
+    width: 54px;
+    height: 54px;
   }
 
-  .our-story__prose {
-    align-items: flex-start;
-    text-align: left;
+  .story__stop-card {
+    grid-row: 3;
+    margin: 0;
+    width: 100%;
+    max-width: 290px;
   }
 
-  .our-story__timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding-left: 34px;
+  /* Odd stops pop ABOVE the road, even stops BELOW — a bobbing wave */
+  .story__stop:nth-child(odd) .story__stop-card {
+    grid-row: 1;
   }
 
-  .our-story__timeline::before {
-    display: block;
+  /* Vertical dashed connector from marker to its card */
+  .story__stop-dot::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 16px;
+    border-left: 3px dashed var(--tone);
+    opacity: 0.7;
+  }
+  .story__stop:nth-child(odd) .story__stop-dot::after {
+    bottom: 100%;
+  }
+  .story__stop:nth-child(even) .story__stop-dot::after {
+    top: 100%;
   }
 
-  .our-story__milestone {
-    align-items: center;
-    height: auto;
+  .story__stop:hover .story__stop-card {
+    transform: rotate(0deg) translateY(-6px);
   }
 
-  .our-story__milestone::before {
-    display: block;
+  .story__stop-num {
+    font-size: 3.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story__figure-mask {
+    animation: none;
   }
 }

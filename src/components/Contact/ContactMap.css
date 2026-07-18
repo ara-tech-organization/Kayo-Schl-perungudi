@@ -1,22 +1,258 @@
 .contact-map {
   position: relative;
   padding: 0 0 110px;
-  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 60%);
+  background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 55%);
+  overflow: hidden;
 }
 
 .contact-map__wave {
   display: block;
   width: 100%;
   height: 44px;
-  margin-bottom: 40px;
+  margin-bottom: 46px;
+}
+
+.contact-map__shapes {
+  z-index: 0;
+}
+
+.contact-map__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Map stage ---- */
+.contact-map__stage {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.contact-map__mapcol {
+  position: relative;
+}
+
+/* ---- Image column (playful, animated) ---- */
+.contact-map__imgcol {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.contact-map__img-glow {
+  position: absolute;
+  inset: 8% 6% 6% 6%;
+  z-index: 0;
+  border-radius: 46% 54% 42% 58% / 55% 44% 56% 45%;
+  background: radial-gradient(
+    circle at 42% 35%,
+    var(--color-gold-light),
+    var(--color-primary-light) 58%,
+    transparent 74%
+  );
+  filter: blur(8px);
+  opacity: 0.9;
+  animation: contact-map-breathe 7s ease-in-out infinite;
+}
+
+@keyframes contact-map-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.82;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+.contact-map__img-ring {
+  position: absolute;
+  z-index: 0;
+  width: 150px;
+  height: 150px;
+  bottom: -4%;
+  left: 0%;
+  border-radius: 50%;
+  border: 3px dashed var(--color-secondary);
+  opacity: 0.4;
+}
+
+.contact-map__img-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  will-change: transform;
+}
+
+.contact-map__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  will-change: transform;
+  filter: drop-shadow(0 26px 42px rgba(38, 35, 29, 0.2));
+}
+
+.contact-map__img-sparkle {
+  position: absolute;
+  z-index: 3;
+  top: 3%;
+  right: 5%;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--color-gold-light);
+  color: var(--color-orange-dark);
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-map__img-tag {
+  position: absolute;
+  z-index: 3;
+  top: 7%;
+  left: 1%;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  box-shadow: var(--shadow-lift);
+  font-family: var(--font-accent);
+  font-size: 1.15rem;
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+  cursor: default;
+}
+
+.contact-map__img-tag svg {
+  color: var(--color-orange);
+}
+
+.contact-map__img-chip {
+  position: absolute;
+  z-index: 3;
+  bottom: 9%;
+  right: 2%;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--color-secondary);
+  color: #fff;
+  box-shadow: 0 12px 24px -8px rgba(95, 138, 31, 0.5);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Playful dashed "route" arcing behind the frame */
+.contact-map__route {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: -22px;
+  height: 60px;
+  border-top: 3px dashed var(--color-secondary);
+  border-radius: 50%;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Bouncing location pin dropping onto the map */
+.contact-map__pin {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+}
+
+.contact-map__pin-inner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50% 50% 50% 8px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-glow);
+  transform: rotate(-45deg);
+}
+
+.contact-map__pin-inner svg {
+  transform: rotate(45deg);
+}
+
+.contact-map__pin-ping {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+  animation: contact-map-ping 2.6s ease-out infinite;
+}
+
+@keyframes contact-map-ping {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.9);
+    opacity: 0;
+  }
+}
+
+.contact-map__pin-shadow {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(38, 35, 29, 0.22);
+  filter: blur(2px);
+  animation: contact-map-shadow 2.4s ease-in-out infinite;
+}
+
+@keyframes contact-map-shadow {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.3;
+  }
 }
 
 .contact-map__frame {
   position: relative;
-  margin-top: 44px;
   border-radius: var(--radius-lg);
-  overflow: visible;
+  overflow: hidden;
   box-shadow: var(--shadow-lift);
+  border: 7px solid var(--color-surface);
 }
 
 .contact-map__iframe {
@@ -24,10 +260,32 @@
   width: 100%;
   height: 380px;
   border: 0;
-  border-radius: var(--radius-lg);
-  filter: saturate(0.92) contrast(1.02);
+  filter: saturate(0.94) contrast(1.02);
 }
 
+.contact-map__tape {
+  position: absolute;
+  z-index: 4;
+  width: 90px;
+  height: 26px;
+  background: rgba(248, 188, 38, 0.35);
+  border: 1px dashed rgba(209, 89, 31, 0.35);
+  border-radius: 3px;
+}
+
+.contact-map__tape--l {
+  top: -13px;
+  left: 40px;
+  transform: rotate(-6deg);
+}
+
+.contact-map__tape--r {
+  bottom: -13px;
+  right: 60px;
+  transform: rotate(5deg);
+}
+
+/* ---- Floating address card ---- */
 .contact-map__card {
   position: relative;
   margin: -46px 20px 0;
@@ -35,23 +293,40 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--color-line-soft);
   box-shadow: var(--shadow-lift);
-  padding: 22px 24px;
+  padding: 26px 24px 22px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: flex-start;
+  z-index: 4;
+  will-change: transform;
+}
+
+.contact-map__card-badge {
+  position: absolute;
+  top: -18px;
+  right: 22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-secondary);
+  color: #fff;
+  box-shadow: var(--shadow-soft);
+  border: 3px solid var(--color-surface);
 }
 
 .contact-map__card strong {
   font-family: var(--font-display);
-  font-size: 1.02rem;
+  font-size: 1.04rem;
   color: var(--color-ink);
 }
 
 .contact-map__card p {
   font-size: 0.88rem;
   margin: 0;
-  max-width: 42ch;
+  max-width: 40ch;
 }
 
 .contact-map__directions {
@@ -60,16 +335,127 @@
   font-size: 0.88rem;
 }
 
+/* ---- Nearby-area pills ---- */
+.contact-map__nearby {
+  margin-top: 52px;
+  text-align: center;
+}
+
+.contact-map__nearby-label {
+  font-family: var(--font-accent);
+  font-size: 1.3rem;
+  color: var(--color-secondary-dark);
+  margin-bottom: 16px;
+}
+
+.contact-map__pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-map__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+  cursor: default;
+  will-change: transform;
+  transition: border-color var(--dur-fast) var(--ease-premium),
+    color var(--dur-fast) var(--ease-premium),
+    background var(--dur-fast) var(--ease-premium);
+}
+
+.contact-map__pill svg {
+  color: var(--color-primary);
+  transition: color var(--dur-fast) var(--ease-premium);
+}
+
+.contact-map__pill:hover {
+  border-color: var(--color-secondary);
+  background: var(--color-secondary-light);
+  color: var(--color-secondary-dark);
+}
+
+.contact-map__pill:hover svg {
+  color: var(--color-secondary-dark);
+}
+
+/* ---- Responsive ---- */
+
+/* Below the two-column desktop layout, centre + cap the image so it
+   never balloons to full container width when stacked under the map. */
+@media (max-width: 991.98px) {
+  .contact-map__imgcol {
+    width: 100%;
+    max-width: 540px;
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 575.98px) {
   .contact-map {
-    padding-bottom: 80px;
+    padding-bottom: 76px;
   }
   .contact-map__iframe {
     height: 300px;
   }
   .contact-map__card {
-    margin: -36px 14px 0;
-    padding: 18px 20px;
+    margin: -36px 12px 0;
+    padding: 22px 18px 18px;
+  }
+  .contact-map__nearby {
+    margin-top: 40px;
+  }
+  .contact-map__img-tag {
+    font-size: 1.05rem;
+    padding: 7px 13px;
+  }
+}
+
+/* Extra-small phones (320–359) */
+@media (max-width: 359.98px) {
+  .contact-map__iframe {
+    height: 260px;
+  }
+  .contact-map__card {
+    padding: 20px 15px 16px;
+  }
+  .contact-map__card strong {
+    font-size: 0.98rem;
+  }
+  .contact-map__card p {
+    font-size: 0.84rem;
+  }
+  .contact-map__img-tag {
+    font-size: 0.98rem;
+    padding: 6px 12px;
+  }
+  .contact-map__img-chip {
+    font-size: 0.74rem;
+    padding: 7px 11px;
+  }
+  .contact-map__img-sparkle {
+    width: 34px;
+    height: 34px;
+  }
+  .contact-map__nearby-label {
+    font-size: 1.15rem;
+  }
+  .contact-map__pill {
+    font-size: 0.8rem;
+    padding: 8px 13px;
   }
 }
 
@@ -81,15 +467,14 @@
 
 @media (min-width: 768px) {
   .contact-map__iframe {
-    height: 440px;
+    height: 460px;
   }
-
   .contact-map__card {
     position: absolute;
     left: 40px;
-    bottom: 28px;
+    bottom: 30px;
     margin: 0;
-    max-width: 340px;
+    max-width: 350px;
   }
 }
 
@@ -97,13 +482,35 @@
   .contact-map {
     padding-bottom: 130px;
   }
+  .contact-map__stage {
+    grid-template-columns: 1.05fr 1fr;
+    gap: 34px;
+  }
   .contact-map__iframe {
-    height: 480px;
+    height: 500px;
   }
   .contact-map__card {
-    left: 56px;
-    bottom: 36px;
-    max-width: 380px;
-    padding: 26px 28px;
+    left: 44px;
+    bottom: 34px;
+    max-width: 360px;
+    padding: 26px 26px 22px;
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1200px) {
+  .contact-map__stage {
+    gap: 44px;
+  }
+  .contact-map__iframe {
+    height: 540px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-map__pin-shadow,
+  .contact-map__pin-ping,
+  .contact-map__img-glow {
+    animation: none;
   }
 }

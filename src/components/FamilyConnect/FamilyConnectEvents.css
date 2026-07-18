@@ -1,185 +1,214 @@
 .fc-events {
   position: relative;
-  padding: 64px 0 56px;
+  padding: var(--section-pad) 0;
   background: var(--color-bg);
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .fc-events {
-    padding: 84px 0 68px;
-  }
+.fc-events .container {
+  position: relative;
+  z-index: 1;
 }
 
-@media (min-width: 992px) {
-  .fc-events {
-    padding: 100px 0 80px;
-  }
-}
-
-.fc-events__viewport {
+/* ---------- Winding year path ---------- */
+.fc-events__path {
   position: relative;
   margin-top: 44px;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
-}
-
-.fc-events__rail {
   display: flex;
-  gap: 24px;
-  width: max-content;
-  padding: 6px 12px 16px;
-  animation: fc-events-loop 26s linear infinite;
+  flex-direction: column;
+  gap: 26px;
 }
 
-.fc-events__viewport:hover .fc-events__rail {
-  animation-play-state: paused;
+/* the dashed "road" running through the year */
+.fc-events__path::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 29px;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-line) 0,
+    var(--color-line) 8px,
+    transparent 8px,
+    transparent 16px
+  );
 }
 
-@keyframes fc-events-loop {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fc-events__rail {
-    animation: none;
-  }
-}
-
-.fc-events__ticket {
+.fc-events__stop {
   position: relative;
-  flex-shrink: 0;
-  width: 78vw;
-  max-width: 280px;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ---------- Month medallion sitting on the road ---------- */
+.fc-events__medallion {
+  --m-solid: var(--color-primary);
+  --m-ink: var(--color-primary-dark);
+  position: relative;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--m-solid);
+  color: #fff;
+  border: 4px solid var(--color-bg);
+  box-shadow: var(--shadow-sticker);
+}
+
+.fc-events__medallion svg {
+  width: 26px;
+  height: 26px;
+}
+
+.fc-events__medallion--secondary {
+  --m-solid: var(--color-secondary-dark);
+}
+.fc-events__medallion--gold {
+  --m-solid: var(--color-gold);
+  color: var(--color-ink);
+}
+.fc-events__medallion--orange {
+  --m-solid: var(--color-orange);
+}
+
+.fc-events__medallion-month {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+/* ---------- Event card ---------- */
+.fc-events__card {
+  --c-soft: var(--color-primary-light);
+  --c-ink: var(--color-primary-dark);
+  position: relative;
+  padding: 20px 22px;
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   border: 1px solid var(--color-line-soft);
+  border-left: 5px solid var(--c-ink);
   box-shadow: var(--shadow-soft);
+  overflow: hidden;
   transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium);
 }
 
-.fc-events__ticket:hover {
-  transform: translateY(-8px);
+.fc-events__card:hover {
+  transform: translateY(-5px) rotate(-0.6deg);
   box-shadow: var(--shadow-lift);
 }
 
-.fc-events__ticket::before,
-.fc-events__ticket::after {
-  content: "";
-  position: absolute;
-  top: 98px;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--color-bg);
-  border: 1px solid var(--color-line-soft);
-  z-index: 2;
+.fc-events__card--secondary {
+  --c-soft: var(--color-secondary-light);
+  --c-ink: var(--color-secondary-dark);
+}
+.fc-events__card--gold {
+  --c-soft: var(--color-gold-light);
+  --c-ink: var(--color-orange-dark);
+}
+.fc-events__card--orange {
+  --c-soft: var(--color-orange-light);
+  --c-ink: var(--color-orange-dark);
 }
 
-.fc-events__ticket::before {
-  left: -13px;
-}
-
-.fc-events__ticket::after {
-  right: -13px;
-}
-
-.fc-events__ticket-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 26px 24px 22px;
-}
-
-.fc-events__icon {
-  display: grid;
-  place-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
-}
-
-.fc-events__ticket--secondary .fc-events__icon {
-  background: var(--color-secondary-light);
-  color: var(--color-secondary-dark);
-}
-
-.fc-events__ticket--gold .fc-events__icon {
-  background: var(--color-gold-light);
-  color: var(--color-orange-dark);
-}
-
-.fc-events__ticket--orange .fc-events__icon {
-  background: var(--color-orange-light);
-  color: var(--color-orange-dark);
-}
-
-.fc-events__tag {
-  font-family: var(--font-display);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-ink-faint);
-}
-
-.fc-events__perf {
-  position: relative;
-  height: 1px;
-  margin: 0 26px;
-}
-
-.fc-events__perf::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  border-top: 1.5px dashed var(--color-line);
-}
-
-.fc-events__ticket-body {
-  padding: 22px 24px 28px;
-}
-
-.fc-events__ticket-body h3 {
-  font-size: 1.06rem;
+.fc-events__month {
+  display: inline-block;
+  padding: 4px 12px;
   margin-bottom: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--c-soft);
+  color: var(--c-ink);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-.fc-events__ticket-body p {
-  font-size: 0.9rem;
+.fc-events__card h3 {
+  font-size: 1.12rem;
+  margin-bottom: 6px;
 }
 
-@media (min-width: 576px) {
-  .fc-events__ticket {
-    width: 260px;
+.fc-events__card p {
+  font-size: 0.92rem;
+}
+
+.fc-events__confetti {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c-soft) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+/* ---------- Desktop: alternate cards left/right of the centre road ---------- */
+@media (min-width: 900px) {
+  .fc-events__path {
+    gap: 6px;
   }
-}
 
-@media (min-width: 768px) {
-  .fc-events__ticket {
-    width: 280px;
+  .fc-events__path::before {
+    left: 50%;
+    transform: translateX(-50%);
   }
-}
 
-@media (min-width: 992px) {
-  .fc-events__ticket {
-    width: 300px;
+  .fc-events__stop {
+    display: flex;
+    align-items: center;
+    padding: 16px 0;
   }
-}
 
-@media (min-width: 1240px) {
-  .fc-events__ticket {
-    width: calc((var(--container-w) - 3 * 24px) / 4);
+  .fc-events__medallion {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .fc-events__card {
+    width: min(420px, 44%);
+  }
+
+  .fc-events__stop--left {
+    justify-content: flex-start;
+  }
+
+  .fc-events__stop--left .fc-events__card {
+    margin-right: 60px;
+    border-left: none;
+    border-right: 5px solid var(--c-ink);
+    text-align: right;
+  }
+
+  .fc-events__stop--left .fc-events__confetti {
+    right: auto;
+    left: -14px;
+  }
+
+  .fc-events__stop--right {
+    justify-content: flex-end;
+  }
+
+  .fc-events__stop--right .fc-events__card {
+    margin-left: 60px;
   }
 }

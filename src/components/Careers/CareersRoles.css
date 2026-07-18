@@ -1,164 +1,278 @@
 .cr-roles {
   position: relative;
-  padding: 8px 0 56px;
-  background: var(--color-bg);
+  padding: calc(var(--section-pad) + 34px) 0 calc(var(--section-pad) + 40px);
+  background: var(--color-bg-deep);
+  overflow: hidden;
 }
 
-@media (min-width: 576px) {
-  .cr-roles {
-    padding: 8px 0 64px;
-  }
+/* organic wave edges — the white section above and the form below both
+   flow into the cork board with a curved boundary */
+.cr-roles__wave-top,
+.cr-roles__wave-bottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: clamp(46px, 6vw, 78px);
+  z-index: 2;
+  display: block;
+  pointer-events: none;
 }
 
-@media (min-width: 768px) {
-  .cr-roles {
-    padding: 8px 0 92px;
-  }
+.cr-roles__wave-top {
+  top: -1px;
 }
 
-@media (min-width: 992px) {
-  .cr-roles {
-    padding: 8px 0 110px;
-  }
+.cr-roles__wave-bottom {
+  bottom: -1px;
 }
 
-.cr-roles__cloud {
-  margin-top: 44px;
+/* faint cork-board speckle */
+.cr-roles__board-grain {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(38, 35, 29, 0.06) 1px, transparent 1px),
+    radial-gradient(rgba(146, 43, 141, 0.05) 1px, transparent 1px);
+  background-size: 18px 18px, 26px 26px;
+  background-position: 0 0, 9px 13px;
+  opacity: 0.8;
+}
+
+.cr-roles__inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* live count chip */
+.cr-roles__count {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  gap: 14px;
-}
-
-.cr-roles__pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 13px 20px;
+  gap: 9px;
+  width: fit-content;
+  margin: 22px auto 0;
+  padding: 9px 18px;
   border-radius: var(--radius-pill);
   background: var(--color-surface);
-  border: 1px solid var(--color-line-soft);
+  border: 1px solid var(--color-line);
   box-shadow: var(--shadow-soft);
-  font-family: var(--font-display);
-  font-size: 0.92rem;
+  font-weight: 700;
+  font-size: 0.86rem;
   color: var(--color-ink);
-  cursor: pointer;
-  transform: rotate(var(--tilt, 0deg));
-  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium),
-    background var(--dur-med) var(--ease-premium), color var(--dur-med) var(--ease-premium),
-    border-color var(--dur-med) var(--ease-premium);
 }
 
-.cr-roles__pill:nth-child(odd) {
-  --tilt: -2deg;
-}
-
-.cr-roles__pill:nth-child(even) {
-  --tilt: 2deg;
-}
-
-.cr-roles__pill:hover {
-  transform: translateY(-6px) rotate(0deg) scale(1.04);
-  box-shadow: var(--shadow-lift);
-}
-
-.cr-roles__pill-icon {
-  width: 19px;
-  height: 19px;
+.cr-roles__pulse {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-secondary-dark);
   flex-shrink: 0;
-  color: var(--color-primary-dark);
-  transition: color var(--dur-med) var(--ease-premium);
 }
 
-.cr-roles__pill-arrow {
+.cr-roles__pulse::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--color-secondary);
+  animation: cr-roles-pulse 1.8s ease-out infinite;
+}
+
+@keyframes cr-roles-pulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ---------- Pinned sticky-note wall (masonry) ---------- */
+.cr-roles__wall {
+  margin-top: 42px;
+  column-count: 1;
+  column-gap: 22px;
+}
+
+.cr-roles__note {
+  --note-bg: var(--color-primary-light);
+  --note-ink: var(--color-primary-dark);
+  --note-pin: var(--color-primary);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 22px;
+  padding: 30px 20px 18px;
+  border-radius: 6px 6px 14px 6px;
+  background: var(--note-bg);
+  box-shadow: 0 14px 26px -14px rgba(38, 35, 29, 0.5);
+  break-inside: avoid;
+  transform: rotate(var(--tilt, 0deg));
+  transform-origin: center 12%;
+  cursor: pointer;
+  will-change: transform;
+  transition: box-shadow var(--dur-med) var(--ease-premium);
+}
+
+.cr-roles__note--secondary {
+  --note-bg: var(--color-secondary-light);
+  --note-ink: var(--color-secondary-dark);
+  --note-pin: var(--color-secondary-dark);
+}
+
+.cr-roles__note--gold {
+  --note-bg: var(--color-gold-light);
+  --note-ink: var(--color-orange-dark);
+  --note-pin: var(--color-gold);
+}
+
+.cr-roles__note--orange {
+  --note-bg: var(--color-orange-light);
+  --note-ink: var(--color-orange-dark);
+  --note-pin: var(--color-orange);
+}
+
+/* size variation so the wall reads as hand-arranged, not a table */
+.cr-roles__note--sm {
+  padding-bottom: 16px;
+}
+
+.cr-roles__note--lg {
+  padding: 34px 22px 26px;
+}
+
+/* pushpin */
+.cr-roles__pin {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, var(--note-pin) 60%, rgba(0, 0, 0, 0.25) 100%);
+  box-shadow: 0 4px 7px -2px rgba(38, 35, 29, 0.55);
+}
+
+.cr-roles__pin::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 8px;
+  background: rgba(38, 35, 29, 0.28);
+  border-radius: 2px;
+}
+
+.cr-roles__note-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--note-ink);
+}
+
+.cr-roles__note-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.cr-roles__note-title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.cr-roles__note--lg .cr-roles__note-title {
+  font-size: 1.16rem;
+}
+
+.cr-roles__note-apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--note-ink);
   opacity: 0;
-  transform: translate(-4px, 4px);
+  transform: translateY(6px);
   transition: opacity var(--dur-fast) var(--ease-premium), transform var(--dur-fast) var(--ease-premium);
 }
 
-.cr-roles__pill:hover .cr-roles__pill-arrow {
+/* folded paper corner */
+.cr-roles__note-fold {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, transparent 50%, rgba(38, 35, 29, 0.12) 50%);
+  border-bottom-right-radius: 14px;
+}
+
+.cr-roles__note:hover {
+  box-shadow: var(--shadow-pop);
+  z-index: 2;
+}
+
+.cr-roles__note:hover .cr-roles__note-apply {
   opacity: 1;
-  transform: translate(0, 0);
+  transform: translateY(0);
 }
 
-.cr-roles__pill--secondary .cr-roles__pill-icon {
-  color: var(--color-secondary-dark);
+.cr-roles__note:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
-.cr-roles__pill--gold .cr-roles__pill-icon {
-  color: var(--color-orange-dark);
+/* ---------- Foot ---------- */
+.cr-roles__foot {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
 }
 
-.cr-roles__pill--orange .cr-roles__pill-icon {
-  color: var(--color-orange-dark);
+.cr-roles__foot a {
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-.cr-roles__pill--primary:hover {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: var(--color-surface);
-}
-
-.cr-roles__pill--primary:hover .cr-roles__pill-icon {
-  color: var(--color-surface);
-}
-
-.cr-roles__pill--secondary:hover {
-  background: var(--color-secondary);
-  border-color: var(--color-secondary);
-  color: var(--color-surface);
-}
-
-.cr-roles__pill--secondary:hover .cr-roles__pill-icon {
-  color: var(--color-surface);
-}
-
-.cr-roles__pill--gold:hover {
-  background: var(--color-gold);
-  border-color: var(--color-gold);
-  color: var(--color-ink);
-}
-
-.cr-roles__pill--orange:hover {
-  background: var(--color-orange);
-  border-color: var(--color-orange);
-  color: var(--color-surface);
-}
-
-.cr-roles__pill--orange:hover .cr-roles__pill-icon {
-  color: var(--color-surface);
-}
-
-.cr-roles__pill--sm {
-  font-size: 0.84rem;
-  padding: 11px 18px;
-}
-
-.cr-roles__pill--md {
-  font-size: 0.92rem;
-}
-
-.cr-roles__pill--lg {
-  font-size: 1.02rem;
-  padding: 16px 24px;
+.cr-roles__foot a:hover {
+  color: var(--color-primary);
 }
 
 @media (min-width: 576px) {
-  .cr-roles__cloud {
-    gap: 16px;
+  .cr-roles__wall {
+    column-count: 2;
   }
 }
 
 @media (min-width: 768px) {
-  .cr-roles__cloud {
-    margin-top: 52px;
-    gap: 18px;
+  .cr-roles__wall {
+    column-count: 3;
   }
 }
 
 @media (min-width: 992px) {
-  .cr-roles__cloud {
-    gap: 20px;
+  .cr-roles__wall {
+    column-count: 4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-roles__note {
+    transform: none !important;
+  }
+
+  .cr-roles__pulse::after {
+    animation: none;
   }
 }

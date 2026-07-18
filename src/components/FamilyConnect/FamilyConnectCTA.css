@@ -1,42 +1,83 @@
 .fc-cta {
-  padding: 0 0 90px;
+  padding: 20px 0 90px;
   background: var(--color-bg);
 }
 
 .fc-cta__card {
   position: relative;
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 52px 30px;
+  overflow: hidden;
   border-radius: var(--radius-lg);
-  background: linear-gradient(150deg, var(--color-primary-light) 0%, var(--color-surface) 70%);
-  box-shadow: var(--shadow-lift);
-  border: 1px solid var(--color-line-soft);
+  padding: 56px 24px 52px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 58%, var(--color-forest-dark) 130%);
+  box-shadow: var(--shadow-pop);
+}
+
+.fc-cta__pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.6px, transparent 1.6px);
+  background-size: 26px 26px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.fc-cta__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .fc-cta__icon {
   display: grid;
   place-items: center;
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background: var(--color-surface);
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background: var(--color-gold);
   color: var(--color-primary-dark);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-sticker);
+}
+
+.fc-cta__icon svg {
+  width: 32px;
+  height: 32px;
 }
 
 .fc-cta__card h2 {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-  max-width: 22ch;
-  margin: 0 auto 12px;
+  color: #fff;
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  max-width: 18ch;
+  line-height: 1.15;
+}
+
+.fc-cta__mark {
+  position: relative;
+  white-space: nowrap;
+  color: var(--color-gold);
+}
+
+.fc-cta__mark::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 0.06em;
+  height: 0.16em;
+  background: var(--color-gold);
+  border-radius: 2px;
+  opacity: 0.55;
 }
 
 .fc-cta__card p {
-  max-width: 48ch;
-  margin: 0 auto 28px;
-  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.02rem;
+  max-width: 46ch;
+  margin: 14px auto 0;
 }
 
 .fc-cta__actions {
@@ -44,22 +85,37 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 14px;
+  margin-top: 28px;
 }
 
-@media (min-width: 576px) {
-  .fc-cta {
-    padding: 0 0 100px;
-  }
+.fc-cta__btn-primary {
+  background: var(--color-gold);
+  color: var(--color-primary-dark);
+  box-shadow: 0 14px 30px -12px rgba(248, 188, 38, 0.7);
+}
+
+.fc-cta__btn-primary:hover {
+  background: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -12px rgba(255, 255, 255, 0.5);
+}
+
+.fc-cta__hearts {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.fc-cta__hearts svg {
+  color: var(--color-orange);
 }
 
 @media (min-width: 768px) {
-  .fc-cta {
-    padding: 0 0 110px;
-  }
-}
-
-@media (min-width: 992px) {
-  .fc-cta {
-    padding: 0 0 120px;
+  .fc-cta__card {
+    padding: 72px 40px 66px;
   }
 }

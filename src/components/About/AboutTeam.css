@@ -1,0 +1,245 @@
+/* ==========================================================================
+   About · Our Team — arch-framed photo + a wave of quality cards
+   (unique to the About page; the home page keeps the shared OurTeam grid)
+   ========================================================================== */
+.ateam {
+  position: relative;
+  padding: var(--section-pad) 0 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+}
+
+.ateam .container {
+  position: relative;
+  z-index: 1;
+}
+
+.ateam .section-heading {
+  margin-bottom: 44px;
+}
+
+.ateam__chip {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  left: 6%;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  color: var(--color-primary);
+  pointer-events: none;
+}
+
+@media (max-width: 479.98px) {
+  .ateam__chip {
+    display: none;
+  }
+}
+
+/* ---- Intro: arch-framed team photo + copy ---- */
+.ateam__intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.ateam__art {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+/* Offset solid frame peeking behind the arch */
+.ateam__art-frame {
+  position: absolute;
+  inset: 6% -5% -6% 5%;
+  border-radius: 180px 180px 20px 20px;
+  background: var(--color-secondary-light);
+  z-index: 0;
+}
+
+.ateam__art-photo {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 180px 180px 16px 16px;
+  border: 6px solid var(--color-surface);
+  box-shadow: var(--shadow-pop);
+}
+
+.ateam__art-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--dur-slow) var(--ease-premium);
+}
+
+.ateam__art:hover .ateam__art-img {
+  transform: scale(1.05);
+}
+
+.ateam__art-badge {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: -16px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lift);
+  border: 1px solid var(--color-line-soft);
+  font-family: var(--font-accent);
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.ateam__art-badge svg {
+  color: var(--color-orange);
+}
+
+.ateam__copy {
+  text-align: center;
+}
+
+.ateam__lead {
+  font-size: 1.02rem;
+  margin: 0 0 20px;
+}
+
+.ateam__note {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0;
+  padding: 18px 22px;
+  background: var(--color-secondary-light);
+  border-radius: var(--radius-md);
+  border: 2px dashed var(--color-secondary);
+}
+
+/* ---- Wave of quality cards ---- */
+.ateam__wave {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 34px 24px;
+  padding-top: 26px;
+}
+
+.ateam__card {
+  --tone: var(--color-primary);
+  --tone-soft: var(--color-primary-light);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px 22px 26px;
+  background: var(--color-surface);
+  border: 2px solid var(--tone);
+  border-radius: 26px;
+  box-shadow: 6px 9px 0 -2px var(--tone-soft);
+  cursor: default;
+  will-change: transform;
+}
+
+.ateam__card--primary { --tone: var(--color-primary); --tone-soft: var(--color-primary-light); }
+.ateam__card--secondary { --tone: var(--color-secondary); --tone-soft: var(--color-secondary-light); }
+.ateam__card--gold { --tone: var(--color-gold); --tone-soft: var(--color-gold-light); }
+.ateam__card--orange { --tone: var(--color-orange); --tone-soft: var(--color-orange-light); }
+
+/* Icon disc overlapping the top edge */
+.ateam__card-icon {
+  position: absolute;
+  top: -28px;
+  left: 22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: var(--tone);
+  color: #fff;
+  box-shadow: 0 12px 22px -12px rgba(38, 35, 29, 0.5);
+}
+
+.ateam__card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.ateam__card h3 {
+  font-size: 1.1rem;
+  color: var(--color-ink);
+}
+
+.ateam__card p {
+  font-size: 0.9rem;
+}
+
+/* ---- Bottom wave divider ---- */
+.ateam__wave-svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 50px;
+  margin-top: 60px;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (min-width: 576px) {
+  .ateam__wave {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 28px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ateam__intro {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+  }
+  .ateam__art {
+    margin-inline: 0;
+  }
+  .ateam__copy {
+    text-align: left;
+  }
+  .ateam__wave-svg {
+    height: 80px;
+  }
+}
+
+@media (min-width: 992px) {
+  .ateam__wave {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+  /* Zig-zag baseline so the four cards read as a playful wave, not a row */
+  .ateam__wave .ateam__card:nth-child(1) { margin-top: 28px; }
+  .ateam__wave .ateam__card:nth-child(2) { margin-top: 0; }
+  .ateam__wave .ateam__card:nth-child(3) { margin-top: 40px; }
+  .ateam__wave .ateam__card:nth-child(4) { margin-top: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ateam__card {
+    transform: none !important;
+  }
+}

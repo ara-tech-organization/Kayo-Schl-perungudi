@@ -1,8 +1,9 @@
 import PageLayout from "../components/layout/PageLayout";
+import ScrollProgress from "../components/common/ScrollProgress";
 import AboutHero from "../components/About/AboutHero";
 import OurStory from "../components/About/OurStory";
 import Founders from "../components/About/Founders";
-import OurTeam from "../components/About/OurTeam";
+import AboutTeam from "../components/About/AboutTeam";
 import EnquiryCTA from "../components/Home/EnquiryCTA";
 import useSeo from "../hooks/useSeo";
 
@@ -42,10 +43,11 @@ export default function AboutPage() {
 
   return (
     <PageLayout>
+      <ScrollProgress />
       <AboutHero />
       <OurStory />
       <Founders />
-      <OurTeam />
+      <AboutTeam />
       <EnquiryCTA />
     </PageLayout>
   );

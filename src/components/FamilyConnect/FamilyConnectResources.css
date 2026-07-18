@@ -1,44 +1,42 @@
 .fc-resources {
-  padding: 64px 0;
-  background: var(--color-bg);
+  position: relative;
+  padding: var(--section-pad) 0;
+  background: var(--color-bg-alt);
+  overflow: hidden;
 }
 
-@media (min-width: 576px) {
-  .fc-resources {
-    padding: 72px 0;
-  }
+.fc-resources__blob {
+  width: 340px;
+  height: 340px;
+  top: -120px;
+  right: -110px;
+  background: radial-gradient(circle at 40% 40%, var(--color-primary-light), transparent 70%);
+  z-index: 0;
+}
+
+.fc-resources__inner {
+  position: relative;
+  z-index: 1;
 }
 
 .fc-resources__policy-link {
-  font-weight: 700;
   color: var(--color-primary-dark);
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
-  transition: color var(--dur-fast) var(--ease-premium);
 }
 
 .fc-resources__policy-link:hover {
   color: var(--color-primary);
 }
 
-@media (min-width: 768px) {
-  .fc-resources {
-    padding: 84px 0;
-  }
-}
-
-@media (min-width: 992px) {
-  .fc-resources {
-    padding: 100px 0;
-  }
-}
-
 .fc-resources__grid {
-  margin-top: 48px;
+  margin-top: 40px;
   display: grid;
-  gap: 24px;
+  gap: 26px;
 }
 
+/* ---------- Playful coloured accordion ---------- */
 .fc-resources__accordion {
   display: flex;
   flex-direction: column;
@@ -46,65 +44,91 @@
 }
 
 .fc-resources__item {
-  border: 1px solid var(--color-line-soft);
-  border-radius: var(--radius-md);
+  --a-soft: var(--color-primary-light);
+  --a-ink: var(--color-primary-dark);
+  border-radius: var(--radius-lg);
   background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  box-shadow: var(--shadow-soft);
   overflow: hidden;
-  transition: border-color var(--dur-fast) var(--ease-premium), box-shadow var(--dur-fast) var(--ease-premium);
+  transition: border-color var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium),
+    transform var(--dur-med) var(--ease-premium);
+}
+
+.fc-resources__item--secondary {
+  --a-soft: var(--color-secondary-light);
+  --a-ink: var(--color-secondary-dark);
+}
+.fc-resources__item--gold {
+  --a-soft: var(--color-gold-light);
+  --a-ink: var(--color-orange-dark);
+}
+.fc-resources__item--orange {
+  --a-soft: var(--color-orange-light);
+  --a-ink: var(--color-orange-dark);
 }
 
 .fc-resources__item.is-open {
-  border-color: var(--color-primary-light);
-  box-shadow: var(--shadow-soft);
+  border-color: var(--a-ink);
+  box-shadow: var(--shadow-lift);
+}
+
+.fc-resources__item:hover:not(.is-open) {
+  transform: translateX(4px);
 }
 
 .fc-resources__question {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: none;
+  gap: 14px;
+  padding: 16px 18px;
+  background: transparent;
   border: none;
-  text-align: left;
-  padding: 18px 20px;
   cursor: pointer;
+  text-align: left;
 }
 
 .fc-resources__q-icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
   display: grid;
   place-items: center;
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--a-soft);
+  color: var(--a-ink);
+  transition: background var(--dur-med) var(--ease-premium), color var(--dur-med) var(--ease-premium);
+}
+
+.fc-resources__item.is-open .fc-resources__q-icon {
+  background: var(--a-ink);
+  color: #fff;
 }
 
 .fc-resources__q-label {
   flex: 1;
   font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.04rem;
   color: var(--color-ink);
 }
 
 .fc-resources__toggle {
   flex-shrink: 0;
+  display: grid;
+  place-items: center;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--color-bg-alt);
-  color: var(--color-ink-soft);
+  background: var(--a-soft);
+  color: var(--a-ink);
   transition: transform var(--dur-med) var(--ease-premium), background var(--dur-med) var(--ease-premium),
     color var(--dur-med) var(--ease-premium);
 }
 
 .fc-resources__item.is-open .fc-resources__toggle {
-  transform: rotate(45deg);
-  background: var(--color-primary);
+  transform: rotate(135deg);
+  background: var(--a-ink);
   color: #fff;
 }
 
@@ -113,29 +137,51 @@
 }
 
 .fc-resources__answer {
-  padding: 0 20px 22px 76px;
+  padding: 0 20px 20px 76px;
   font-size: 0.94rem;
+  color: var(--color-ink-soft);
 }
 
+/* ---------- Sticker side notes ---------- */
 .fc-resources__side {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 20px;
 }
 
 .fc-resources__note {
+  --n-soft: var(--color-gold-light);
+  --n-ink: var(--color-orange-dark);
   position: relative;
-  padding: 30px 26px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.fc-resources__note--handbook {
-  background: var(--color-bg-alt);
+  padding: 26px 24px 24px;
+  border-radius: 26px;
+  background: var(--n-soft);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-sticker);
+  transform: rotate(-1.4deg);
+  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium);
 }
 
 .fc-resources__note--updates {
-  background: linear-gradient(150deg, var(--color-primary-light) 0%, var(--color-bg-alt) 100%);
+  --n-soft: var(--color-secondary-light);
+  --n-ink: var(--color-secondary-dark);
+  transform: rotate(1.4deg);
+}
+
+.fc-resources__note:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: var(--shadow-pop);
+}
+
+.fc-resources__note-tape {
+  position: absolute;
+  top: -10px;
+  left: 28px;
+  width: 60px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px dashed rgba(38, 35, 29, 0.18);
+  transform: rotate(-6deg);
+  border-radius: 3px;
 }
 
 .fc-resources__note-icon {
@@ -143,25 +189,27 @@
   place-items: center;
   width: 52px;
   height: 52px;
-  border-radius: 15px;
-  margin-bottom: 16px;
+  border-radius: 16px;
+  margin-bottom: 12px;
   background: var(--color-surface);
-  color: var(--color-primary-dark);
-  box-shadow: var(--shadow-soft);
+  color: var(--n-ink);
+  box-shadow: 0 10px 20px -12px rgba(38, 35, 29, 0.4);
 }
 
 .fc-resources__note h3 {
-  font-size: 1.1rem;
+  font-size: 1.14rem;
   margin-bottom: 8px;
 }
 
 .fc-resources__note p {
   font-size: 0.92rem;
+  color: var(--color-ink-soft);
 }
 
 @media (min-width: 992px) {
   .fc-resources__grid {
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: 1.35fr 0.85fr;
     align-items: start;
+    gap: 40px;
   }
 }

@@ -1,113 +1,110 @@
 .fc-benefits {
   position: relative;
-  padding: 64px 0 56px;
-  background: var(--color-bg-alt);
+  padding: var(--section-pad) 0;
+  background: var(--color-bg);
   overflow: hidden;
 }
 
+.fc-benefits__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.fc-benefits__grid {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.fc-benefits__tile {
+  --t-soft: var(--color-primary-light);
+  --t-ink: var(--color-primary-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 26px 16px 20px;
+  border-radius: 24px;
+  background: var(--color-surface);
+  border: 2px solid var(--t-soft);
+  box-shadow: var(--shadow-soft);
+  transform: rotate(var(--tilt, 0deg));
+  cursor: default;
+  will-change: transform;
+  transition: box-shadow var(--dur-med) var(--ease-premium), border-color var(--dur-med) var(--ease-premium);
+}
+
+.fc-benefits__tile--secondary {
+  --t-soft: var(--color-secondary-light);
+  --t-ink: var(--color-secondary-dark);
+}
+.fc-benefits__tile--gold {
+  --t-soft: var(--color-gold-light);
+  --t-ink: var(--color-orange-dark);
+}
+.fc-benefits__tile--orange {
+  --t-soft: var(--color-orange-light);
+  --t-ink: var(--color-orange-dark);
+}
+
+.fc-benefits__tile:hover {
+  border-color: var(--t-ink);
+  box-shadow: var(--shadow-lift);
+}
+
+.fc-benefits__tile-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--t-soft);
+  color: var(--t-ink);
+}
+
+.fc-benefits__tile-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.fc-benefits__tile-label {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
 @media (min-width: 576px) {
-  .fc-benefits {
-    padding: 72px 0 60px;
+  .fc-benefits__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 }
 
 @media (min-width: 768px) {
-  .fc-benefits {
-    padding: 84px 0 68px;
+  .fc-benefits__tile-label {
+    font-size: 0.98rem;
   }
 }
 
 @media (min-width: 992px) {
-  .fc-benefits {
-    padding: 100px 0 80px;
+  .fc-benefits__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 960px;
+    margin-inline: auto;
   }
-}
 
-.fc-benefits__marquee {
-  margin-top: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
-}
-
-.fc-benefits__row {
-  overflow: hidden;
-}
-
-.fc-benefits__track {
-  display: flex;
-  width: max-content;
-  gap: 16px;
-  animation: fc-marquee 32s linear infinite;
-}
-
-.fc-benefits__row--reverse .fc-benefits__track {
-  animation-direction: reverse;
-  animation-duration: 38s;
-}
-
-.fc-benefits__row:hover .fc-benefits__track {
-  animation-play-state: paused;
-}
-
-.fc-benefits__pill {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: var(--radius-pill);
-  background: var(--color-surface);
-  border: 1px solid var(--color-line-soft);
-  box-shadow: var(--shadow-soft);
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: var(--color-ink);
-  white-space: nowrap;
-  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium),
-    color var(--dur-med) var(--ease-premium);
-}
-
-.fc-benefits__pill:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: var(--shadow-lift);
-  color: var(--color-primary-dark);
-}
-
-.fc-benefits__pill-icon {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
-  background: var(--color-primary-light);
-  color: var(--color-primary-dark);
-  flex-shrink: 0;
-}
-
-.fc-benefits__pill:nth-child(3n) .fc-benefits__pill-icon {
-  background: var(--color-secondary-light);
-  color: var(--color-secondary-dark);
-}
-
-.fc-benefits__pill:nth-child(3n + 1) .fc-benefits__pill-icon {
-  background: var(--color-gold-light);
-  color: var(--color-orange-dark);
-}
-
-@keyframes fc-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
+  /* gently stagger rows for a hand-placed, bouncy feel */
+  .fc-benefits__tile:nth-child(3n + 2) {
+    margin-top: 22px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fc-benefits__track {
-    animation: none;
+  .fc-benefits__tile {
+    transform: none !important;
   }
 }

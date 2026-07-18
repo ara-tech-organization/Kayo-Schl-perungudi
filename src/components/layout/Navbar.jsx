@@ -1,7 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, Phone, X } from "lucide-react";
+import {
+  ArrowRight,
+  Briefcase,
+  ChevronDown,
+  GraduationCap,
+  HeartHandshake,
+  Menu,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+  Store,
+  X,
+} from "lucide-react";
 import logo from "../../assets/Logo.png";
 import "./Navbar.css";
 
@@ -11,18 +23,18 @@ const LINKS = [
     label: "About",
     to: "/about-us",
     children: [
-      { to: "/about-us", label: "Our Story" },
-      { to: "/curriculum", label: "Curriculum" },
-      { to: "/franchise", label: "Franchise" },
+      { to: "/about-us", label: "Our Story", icon: Sparkles, desc: "How Kayo began" },
+      { to: "/curriculum", label: "Curriculum", icon: GraduationCap, desc: "NURTURE Lab programme" },
+      { to: "/franchise", label: "Franchise", icon: Store, desc: "Partner with us" },
     ],
   },
   {
     label: "Careers",
     to: "/careers",
     children: [
-      { to: "/careers", label: "Job Openings" },
-      { to: "/family-connect", label: "Family Connect" },
-      { to: "/policies", label: "Policies" },
+      { to: "/careers", label: "Job Openings", icon: Briefcase, desc: "Join our team" },
+      { to: "/family-connect", label: "Family Connect", icon: HeartHandshake, desc: "Staying in touch" },
+      { to: "/policies", label: "Policies", icon: ShieldCheck, desc: "Safety & standards" },
     ],
   },
   { to: "/contact-us", label: "Contact" },
@@ -114,7 +126,14 @@ export default function Navbar() {
                           }
                           onClick={() => setDropdown(null)}
                         >
-                          {c.label}
+                          <span className="navbar__dropdown-icon">
+                            {c.icon ? <c.icon size={17} strokeWidth={2} /> : null}
+                          </span>
+                          <span className="navbar__dropdown-text">
+                            <span className="navbar__dropdown-label">{c.label}</span>
+                            {c.desc ? <span className="navbar__dropdown-desc">{c.desc}</span> : null}
+                          </span>
+                          <ArrowRight size={15} strokeWidth={2.4} className="navbar__dropdown-arrow" />
                         </NavLink>
                       ))}
                     </motion.div>
@@ -203,6 +222,9 @@ export default function Navbar() {
                               }
                               onClick={() => setOpen(false)}
                             >
+                              <span className="navbar__dropdown-icon">
+                                {c.icon ? <c.icon size={16} strokeWidth={2} /> : null}
+                              </span>
                               {c.label}
                             </NavLink>
                           ))}

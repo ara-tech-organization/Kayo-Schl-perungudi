@@ -1,122 +1,179 @@
+import { Fragment } from "react";
 import { motion } from "framer-motion";
-import { Heart, Home, Mail, MessageCircle, Phone, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  Clock,
+  Home,
+  Mail,
+  MessageCircle,
+  Phone,
+  Sparkles,
+} from "lucide-react";
 import { Link } from "react-router-dom";
-import contactImg from "../../assets/contact.png";
+import FloatingShapes from "../common/FloatingShapes";
 import "./ContactHero.css";
 
 const EASE = [0.16, 1, 0.3, 1];
 
+const HEADING_WORDS = ["Let's", "Start", "a", "Happy", "Conversation"];
+const HIGHLIGHT_WORDS = new Set(["Happy", "Conversation"]);
+
+const HERO_SHAPES = [
+  { type: "blob", color: "var(--color-primary-light)", size: 170, top: "8%", right: "5%", speed: 0.32, float: 20, dur: 8 },
+  { type: "blob", color: "var(--color-secondary-light)", size: 120, bottom: "18%", left: "1%", speed: 0.28, float: 16, dur: 7 },
+  { type: "ring", color: "var(--color-secondary)", size: 84, top: "60%", right: "10%", speed: 0.44, float: 14, dur: 6, opacity: 0.5 },
+  { type: "dot", color: "var(--color-orange)", size: 22, top: "22%", left: "44%", speed: 0.5, float: 22, dur: 5, opacity: 0.9 },
+  { type: "star", color: "var(--color-gold)", size: 36, top: "14%", left: "5%", speed: 0.3, float: 16, dur: 6, rotate: 16 },
+  { type: "plus", color: "var(--color-secondary-dark)", size: 22, top: "44%", left: "3%", speed: 0.4, float: 14, dur: 5 },
+  { type: "squiggle", color: "var(--color-primary)", size: 70, top: "72%", left: "42%", speed: 0.26, float: 12, dur: 7, opacity: 0.5 },
+  { type: "cloud", color: "var(--color-surface)", size: 62, top: "12%", left: "60%", speed: 0.22, float: 14, dur: 9 },
+];
+
 const CHANNELS = [
   {
     icon: Phone,
+    tone: "gold",
+    tilt: -3,
     label: "Call Us",
     value: "+91 98840 04650",
     href: "tel:+919884004650",
-    pos: "a",
   },
   {
     icon: MessageCircle,
+    tone: "green",
+    tilt: 2.5,
     label: "WhatsApp",
-    value: "Chat Instantly",
+    value: "Chat instantly",
     href: "https://wa.me/919884004650",
-    pos: "b",
   },
   {
     icon: Mail,
+    tone: "purple",
+    tilt: -2,
     label: "Email",
-    value: "chnperungudi@kayointernational.in",
+    value: "Drop us a line",
     href: "mailto:chnperungudi@kayointernational.in",
-    pos: "c",
   },
 ];
+
+const wordContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.12 } },
+};
+
+const wordItem = {
+  hidden: { opacity: 0, y: 24, rotate: -2 },
+  show: { opacity: 1, y: 0, rotate: 0, transition: { duration: 0.55, ease: EASE } },
+};
 
 export default function ContactHero() {
   return (
     <section className="contact-hero">
       <div className="contact-hero__backdrop" aria-hidden="true">
-        <span className="contact-hero__shape contact-hero__shape--dot" />
-        <span className="contact-hero__shape contact-hero__shape--ring" />
-        <span className="contact-hero__shape contact-hero__shape--star">
-          <Sparkles size={20} strokeWidth={1.6} />
-        </span>
+        <span className="contact-hero__mesh" />
+        <span className="contact-hero__grain" />
       </div>
+      <FloatingShapes items={HERO_SHAPES} className="contact-hero__shapes" />
 
       <div className="container contact-hero__grid">
-        <motion.div
-          className="contact-hero__copy"
-          initial={{ opacity: 0, y: 26 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, ease: EASE }}
-        >
-          <nav className="contact-hero__crumb" aria-label="Breadcrumb">
+        <div className="contact-hero__copy">
+          <motion.nav
+            className="contact-hero__crumb"
+            aria-label="Breadcrumb"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: EASE }}
+          >
             <Link to="/">
               <Home size={13} strokeWidth={2.2} /> Home
             </Link>
             <span>/</span>
             <span>Contact Us</span>
-          </nav>
+          </motion.nav>
 
-          <span className="eyebrow">We'd Love to Hear From You</span>
+          <motion.span
+            className="contact-hero__eyebrow"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.05, ease: EASE }}
+          >
+            <Sparkles size={14} strokeWidth={2.4} /> We&rsquo;d Love to Hear From You
+          </motion.span>
 
-          <h1>Get in Touch With KAYO International</h1>
+          <motion.h1 variants={wordContainer} initial="hidden" animate="show">
+            {HEADING_WORDS.map((word, i) => (
+              <Fragment key={`${word}-${i}`}>
+                <motion.span
+                  variants={wordItem}
+                  className={`contact-hero__word ${HIGHLIGHT_WORDS.has(word) ? "contact-hero__hl" : ""}`}
+                >
+                  {word}
+                </motion.span>
+                {i < HEADING_WORDS.length - 1 ? " " : ""}
+              </Fragment>
+            ))}
+          </motion.h1>
 
-          <p className="contact-hero__lead">
-            At KAYO International, we believe that choosing the right preschool is one of the
-            most important decisions you will make for your child. That is why we encourage every
-            parent to reach out, ask questions, and visit our campus before making this decision.
-            We are here to provide all the information you need with warmth, honesty, and
-            transparency.
-          </p>
+          <motion.p
+            className="contact-hero__lead"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
+          >
+            Choosing the right preschool is one of the most important decisions you&rsquo;ll make for
+            your child. So reach out, ask us anything, and visit our Perungudi campus &mdash; we&rsquo;re
+            here with warmth, honesty, and transparency. Pick whichever way feels easiest.
+          </motion.p>
 
-          <p className="contact-hero__lead">
-            You can contact KAYO International preschool by phone, email, WhatsApp, or by filling
-            out the quick enquiry form below. We typically respond to all enquiries within a few
-            hours during preschool hours.
-          </p>
+          <motion.div
+            className="contact-hero__chips"
+            initial="hidden"
+            animate="show"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.65 } } }}
+          >
+            {CHANNELS.map((c) => (
+              <motion.a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith("http") ? "_blank" : undefined}
+                rel={c.href.startsWith("http") ? "noreferrer" : undefined}
+                className={`contact-hero__chip contact-hero__chip--${c.tone}`}
+                style={{ "--tilt": `${c.tilt}deg` }}
+                variants={{
+                  hidden: { opacity: 0, y: 20, rotate: c.tilt * 2, scale: 0.9 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    rotate: c.tilt,
+                    scale: 1,
+                    transition: { type: "spring", stiffness: 200, damping: 15 },
+                  },
+                }}
+                whileHover={{ rotate: 0, y: -8, scale: 1.05 }}
+              >
+                <span className="contact-hero__chip-icon">
+                  <c.icon size={18} strokeWidth={2} />
+                </span>
+                <span className="contact-hero__chip-text">
+                  <strong>{c.label}</strong>
+                  <small>{c.value}</small>
+                </span>
+                <ArrowUpRight size={16} className="contact-hero__chip-arrow" />
+              </motion.a>
+            ))}
+          </motion.div>
 
-          <div className="contact-hero__tag">
-            <Heart size={14} strokeWidth={2.4} /> Enrolment Open for 2025&ndash;26
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="contact-hero__visual"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-        >
-          <img
-            src={contactImg}
-            alt="Happy children at KAYO International Preschool, Perungudi"
-            className="contact-hero__image"
-          />
-
-          {CHANNELS.map((c, i) => (
-            <motion.a
-              key={c.label}
-              href={c.href}
-              target={c.href.startsWith("http") ? "_blank" : undefined}
-              rel={c.href.startsWith("http") ? "noreferrer" : undefined}
-              className={`contact-hero__channel contact-hero__channel--${c.pos}`}
-              initial={{ opacity: 0, y: 16, scale: 0.85 }}
-              animate={{ opacity: 1, y: [0, -8, 0], scale: 1 }}
-              transition={{
-                opacity: { duration: 0.6, delay: 0.4 + i * 0.12, ease: EASE },
-                scale: { duration: 0.6, delay: 0.4 + i * 0.12, ease: EASE },
-                y: { duration: 4.5 + i, delay: 1 + i * 0.2, repeat: Infinity, ease: "easeInOut" },
-              }}
-              whileHover={{ scale: 1.06, y: -6 }}
-            >
-              <span className="contact-hero__channel-icon">
-                <c.icon size={18} strokeWidth={2} />
-              </span>
-              <span className="contact-hero__channel-text">
-                <strong>{c.label}</strong>
-                <small>{c.value}</small>
-              </span>
-            </motion.a>
-          ))}
-        </motion.div>
+          <motion.div
+            className="contact-hero__promise"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1, ease: EASE }}
+          >
+            <span className="contact-hero__promise-pulse" aria-hidden="true" />
+            <Clock size={15} strokeWidth={2.2} />
+            We usually reply within <strong>a few hours</strong> during preschool hours.
+          </motion.div>
+        </div>
       </div>
 
       <svg
