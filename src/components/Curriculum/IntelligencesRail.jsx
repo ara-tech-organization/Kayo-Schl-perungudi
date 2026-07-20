@@ -18,9 +18,15 @@ import "./IntelligencesRail.css";
 const EASE = [0.16, 1, 0.3, 1];
 
 const SHAPES = [
-  { type: "blob", color: "var(--color-gold-light)", size: 160, top: "8%", right: "-3%", speed: 0.26, float: 18, dur: 8 },
-  { type: "star", color: "var(--color-primary)", size: 28, bottom: "16%", left: "5%", speed: 0.38, float: 18, dur: 6, rotate: -16, opacity: 0.6 },
-  { type: "dot", color: "var(--color-orange)", size: 18, top: "24%", left: "9%", speed: 0.48, float: 20, dur: 6, opacity: 0.6 },
+  { type: "blob", color: "var(--color-gold-light)", size: 170, top: "6%", right: "-4%", speed: 0.26, float: 18, dur: 8 },
+  { type: "cloud", color: "var(--color-secondary-light)", size: 84, top: "12%", left: "4%", speed: 0.2, float: 16, dur: 9, opacity: 0.7 },
+  { type: "star", color: "var(--color-primary)", size: 30, bottom: "16%", left: "6%", speed: 0.38, float: 18, dur: 6, rotate: -16, opacity: 0.65 },
+  { type: "star", color: "var(--color-gold)", size: 22, top: "18%", right: "12%", speed: 0.34, float: 16, dur: 7, spin: true, opacity: 0.7 },
+  { type: "dot", color: "var(--color-orange)", size: 18, top: "26%", left: "10%", speed: 0.48, float: 20, dur: 6, opacity: 0.6 },
+  { type: "plus", color: "var(--color-secondary)", size: 26, bottom: "22%", right: "7%", speed: 0.44, float: 18, dur: 7, rotate: 20, opacity: 0.55 },
+  { type: "triangle", color: "var(--color-primary-light)", size: 30, bottom: "10%", right: "24%", speed: 0.3, float: 22, dur: 8, rotate: 18, opacity: 0.6 },
+  { type: "squiggle", color: "var(--color-orange)", size: 74, top: "44%", right: "3%", speed: 0.5, float: 14, dur: 7, opacity: 0.5 },
+  { type: "ring", color: "var(--color-primary)", size: 40, bottom: "34%", left: "3%", speed: 0.4, float: 20, dur: 9, opacity: 0.5 },
 ];
 
 const TONES = ["primary", "secondary", "gold", "orange"];
@@ -29,52 +35,62 @@ const INTELLIGENCES = [
   {
     icon: BookOpenText,
     tag: "Word Smart",
+    short: "Word",
     title: "Verbal-Linguistic",
     text: "Storytelling circles, phonics, vocabulary games, show-and-tell and poetry recitation build strong language skills in children who learn best through words.",
   },
   {
     icon: Calculator,
     tag: "Number Smart",
+    short: "Number",
     title: "Logical-Mathematical",
     text: "Sorting activities, pattern games, building challenges and Montessori maths materials develop reasoning and problem-solving in children who think logically.",
   },
   {
     icon: Shapes,
     tag: "Picture Smart",
+    short: "Picture",
     title: "Visual-Spatial",
     text: "Arty Crafty sessions, block building, puzzles and drawing activities let children express themselves visually through colour, shape and design.",
   },
   {
     icon: Music,
     tag: "Music Smart",
+    short: "Music",
     title: "Musical-Rhythmic",
     text: "Music and movement sessions, rhythmic activities, instruments, and our Bharatanatyam and Western Dance programmes develop a natural feel for melody and rhythm.",
   },
   {
     icon: PersonStanding,
     tag: "Body Smart",
+    short: "Body",
     title: "Bodily-Kinesthetic",
     text: "Outdoor play, yoga, Kayo Sports, sandpit, splash pool and climbing equipment give active learners endless ways to explore through movement.",
   },
   {
     icon: Users,
     tag: "People Smart",
+    short: "People",
     title: "Interpersonal",
     text: "Group projects, collaborative games, circle time and empathy-building exercises help children develop strong social skills and meaningful relationships.",
   },
   {
     icon: UserCircle,
     tag: "Self Smart",
+    short: "Self",
     title: "Intrapersonal",
     text: "Reflection time, emotional coaching, mindfulness practices and freedom of choice help children understand themselves and manage their emotions confidently.",
   },
   {
     icon: Leaf,
     tag: "Nature Smart",
+    short: "Nature",
     title: "Naturalist",
     text: "Nature walks, gardening, outdoor learning spaces and environmental projects connect children who are drawn to the natural world around them.",
   },
 ];
+
+const STEP = 360 / INTELLIGENCES.length;
 
 export default function IntelligencesRail() {
   const [active, setActive] = useState(0);
@@ -82,7 +98,7 @@ export default function IntelligencesRail() {
   const currentTone = TONES[active % TONES.length];
 
   return (
-    <section className="mi-showcase" id="intelligences">
+    <section className="mi-orbit" id="intelligences">
       <FloatingShapes items={SHAPES} />
       <div className="container">
         <SectionHeading
@@ -91,57 +107,79 @@ export default function IntelligencesRail() {
           description="Howard Gardner's Multiple Intelligence Theory tells us every child is smart in their own unique way. At KAYO INTERNATIONAL, we celebrate this by nurturing all eight intelligences in every child — because true learning happens when education sees the whole child, not just one side."
         />
 
-        <div className="mi-showcase__layout">
-          <div className="mi-showcase__grid" role="tablist" aria-label="Multiple intelligences">
+        <div className={`mi-orbit__stage mi-orbit__stage--${currentTone}`}>
+          {/* Orbiting picker */}
+          <Reveal scale={0.85} y={0} duration={0.7} className="mi-orbit__ring" role="tablist" aria-label="Multiple intelligences">
+            <span className="mi-orbit__track" aria-hidden="true" />
+            <span className="mi-orbit__track mi-orbit__track--inner" aria-hidden="true" />
+
             {INTELLIGENCES.map((mi, i) => (
               <button
                 type="button"
                 key={mi.title}
                 role="tab"
                 aria-selected={active === i}
-                className={`mi-showcase__pick mi-showcase__pick--${TONES[i % TONES.length]} ${
+                aria-label={`${mi.title} — ${mi.tag}`}
+                style={{ "--angle": `${i * STEP}deg`, "--bob-delay": `${i * -0.55}s` }}
+                className={`mi-orbit__node mi-orbit__node--${TONES[i % TONES.length]} ${
                   active === i ? "is-active" : ""
                 }`}
                 onClick={() => setActive(i)}
                 onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
               >
-                <span className="mi-showcase__pick-icon">
-                  <mi.icon strokeWidth={1.7} />
-                </span>
-                <span className="mi-showcase__pick-text">
-                  <strong>{mi.title}</strong>
-                  <small>{mi.tag}</small>
+                <span className="mi-orbit__node-bob">
+                  <span className="mi-orbit__bubble">
+                    <mi.icon strokeWidth={1.7} />
+                    <small>{mi.short}</small>
+                  </span>
                 </span>
               </button>
             ))}
-          </div>
 
-          <div className="mi-showcase__stage">
+            {/* Center hub — morphs to the active intelligence */}
+            <div className="mi-orbit__hub">
+              <span className="mi-orbit__hub-glow" aria-hidden="true" />
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current.title}
+                  className="mi-orbit__hub-inner"
+                  initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  exit={{ opacity: 0, scale: 0.9, rotate: 6 }}
+                  transition={{ duration: 0.35, ease: EASE }}
+                >
+                  <span className="mi-orbit__hub-count" aria-hidden="true">
+                    {String(active + 1).padStart(2, "0")}
+                    <small>/08</small>
+                  </span>
+                  <span className="mi-orbit__hub-icon">
+                    <current.icon strokeWidth={1.5} />
+                  </span>
+                  <strong className="mi-orbit__hub-title">{current.title}</strong>
+                  <span className="mi-orbit__hub-tag">{current.tag}</span>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </Reveal>
+
+          {/* Speech-bubble caption for the active intelligence */}
+          <div className="mi-orbit__caption" role="tabpanel">
             <AnimatePresence mode="wait">
-              <motion.div
+              <motion.p
                 key={current.title}
-                className={`mi-showcase__detail mi-showcase__detail--${currentTone}`}
-                initial={{ opacity: 0, y: 16, rotate: -1 }}
-                animate={{ opacity: 1, y: 0, rotate: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.4, ease: EASE }}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: EASE }}
               >
-                <span className="mi-showcase__detail-index" aria-hidden="true">
-                  {String(active + 1).padStart(2, "0")}
-                  <small>/08</small>
-                </span>
-                <span className="mi-showcase__detail-icon">
-                  <current.icon strokeWidth={1.5} />
-                </span>
-                <span className="mi-showcase__detail-tag">{current.tag}</span>
-                <h3>{current.title}</h3>
-                <p>{current.text}</p>
-              </motion.div>
+                {current.text}
+              </motion.p>
             </AnimatePresence>
           </div>
         </div>
 
-        <Reveal y={20} delay={0.15} className="mi-showcase__closing">
+        <Reveal y={20} delay={0.15} className="mi-orbit__closing">
           <p>
             By nurturing all eight intelligences, we ensure every child at KAYO INTERNATIONAL finds
             their strength, builds confidence and discovers their own path to excellence.

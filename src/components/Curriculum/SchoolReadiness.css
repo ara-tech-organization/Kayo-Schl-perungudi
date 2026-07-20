@@ -1,5 +1,5 @@
 /* ==========================================================================
-   School Readiness — playful sticker bento
+   School Readiness — "Super-Skill" collectible card deck
    ========================================================================== */
 .readiness {
   position: relative;
@@ -14,127 +14,224 @@
   z-index: 1;
 }
 
+/* ---- Pinned pull-quote card ---- */
 .readiness__intro {
-  max-width: 720px;
-  margin: 0 auto 20px;
+  position: relative;
+  max-width: 640px;
+  margin: 26px auto clamp(20px, 4vw, 30px);
+  padding: clamp(30px, 5vw, 42px) clamp(24px, 4vw, 40px) clamp(22px, 4vw, 28px);
   text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  border-radius: 22px;
+  box-shadow: var(--shadow-pop);
+  transform: rotate(-1deg);
+}
+
+.readiness__quote-mark {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--shadow-glow);
+}
+
+.readiness__quote-mark svg {
+  width: 24px;
+  height: 24px;
 }
 
 .readiness__intro p {
   font-family: var(--font-accent);
-  font-size: clamp(1.1rem, 3.6vw, 1.3rem);
-  color: var(--color-primary);
+  font-size: clamp(1.12rem, 3.6vw, 1.34rem);
+  line-height: 1.5;
+  color: var(--color-primary-dark);
+}
+
+.readiness__quote-by {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.readiness__quote-by::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  margin-right: 8px;
+  vertical-align: middle;
+  background: var(--color-primary);
+  border-radius: 2px;
 }
 
 .readiness__lead-in {
   text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(0.98rem, 2.6vw, 1.05rem);
+  font-size: clamp(1rem, 2.8vw, 1.12rem);
+  font-weight: 700;
   color: var(--color-ink);
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
-.readiness__bento {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px 18px;
+.readiness__lead-in span {
+  font-size: 1.3em;
+  vertical-align: -0.12em;
+  margin-right: 4px;
 }
 
-.readiness__closing {
-  max-width: 780px;
-  margin: 44px auto 0;
-  text-align: center;
+/* ==========================================================================
+   Card deck
+   ========================================================================== */
+.readiness__deck {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(34px, 5vw, 46px) clamp(18px, 3vw, 26px);
+  max-width: 1060px;
+  margin: clamp(46px, 6vw, 66px) auto 0;
 }
 
-.readiness__closing p {
-  font-size: 0.98rem;
+.readiness__card-wrap {
+  display: flex;
+  /* base: one card per row */
+  flex: 0 1 100%;
 }
 
-/* ---- Sticker card ---- */
+/* scattered playful tilts, straightened on hover */
+.readiness__deck > .readiness__card-wrap:nth-child(4n + 1) .readiness__card { --tilt: -2.5deg; }
+.readiness__deck > .readiness__card-wrap:nth-child(4n + 2) .readiness__card { --tilt: 2deg; }
+.readiness__deck > .readiness__card-wrap:nth-child(4n + 3) .readiness__card { --tilt: -1.5deg; }
+.readiness__deck > .readiness__card-wrap:nth-child(4n) .readiness__card { --tilt: 2.4deg; }
+
+/* ---- Collectible card ---- */
 .readiness__card {
   --tone: var(--color-primary);
   --tone-dark: var(--color-primary-dark);
   --tone-soft: var(--color-primary-light);
   position: relative;
-  padding: 26px 24px;
-  border-radius: 24px;
-  background: var(--color-surface);
-  border: 2px solid var(--tone);
-  box-shadow: 6px 8px 0 -1px var(--tone-soft);
-  overflow: hidden;
+  width: 100%;
+  padding: 46px 14px 14px;
+  border-radius: 28px;
+  background: var(--tone);
+  background-image: radial-gradient(circle at 22% 0%, rgba(255, 255, 255, 0.35), transparent 55%);
+  box-shadow: 0 18px 30px -16px var(--tone), inset 0 0 0 2px rgba(255, 255, 255, 0.4);
   transform: rotate(var(--tilt, 0deg));
   transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium);
-}
-
-.readiness__bento > .readiness__card:nth-child(odd) { --tilt: -1deg; }
-.readiness__bento > .readiness__card:nth-child(even) { --tilt: 1deg; }
-
-.readiness__card:hover {
-  transform: rotate(0deg) translateY(-8px);
-  box-shadow: 9px 13px 0 -1px var(--tone-soft);
 }
 
 .readiness__card--secondary { --tone: var(--color-secondary); --tone-dark: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
 .readiness__card--gold { --tone: var(--color-gold); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
 .readiness__card--orange { --tone: var(--color-orange); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
 
-/* Playful corner blob */
-.readiness__card::after {
-  content: "";
-  position: absolute;
-  top: -44px;
-  right: -44px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  opacity: 0.55;
-  background: var(--tone-soft);
-  z-index: 0;
-}
-
-.readiness__tape {
-  position: absolute;
-  top: -8px;
-  left: 26px;
-  width: 58px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px dashed rgba(38, 35, 29, 0.18);
-  transform: rotate(-6deg);
-  border-radius: 3px;
+.readiness__card:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 0 26px 40px -16px var(--tone), inset 0 0 0 2px rgba(255, 255, 255, 0.55);
   z-index: 2;
 }
 
-.readiness__icon {
-  position: relative;
-  z-index: 1;
+/* corner number sticker */
+.readiness__badge {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  z-index: 3;
   display: grid;
   place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 16px;
-  margin-bottom: 16px;
-  background: var(--tone-soft);
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #fff;
   color: var(--tone-dark);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  box-shadow: 0 4px 8px -3px rgba(38, 35, 29, 0.4);
+  transform: rotate(-8deg);
+}
+
+/* dashed halo behind the icon */
+.readiness__ring {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+}
+
+/* icon medallion straddling the colour band and the panel */
+.readiness__icon {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--tone-dark);
+  box-shadow: 0 8px 16px -8px rgba(38, 35, 29, 0.5);
   transition: transform var(--dur-med) var(--ease-premium);
 }
 
+.readiness__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
 .readiness__card:hover .readiness__icon {
-  transform: scale(1.1) rotate(-8deg);
+  transform: translateX(-50%) scale(1.1) rotate(-10deg);
 }
 
-.readiness__card h3 {
+/* white content panel */
+.readiness__panel {
   position: relative;
-  z-index: 1;
-  font-size: 1.1rem;
+  padding: 44px 20px 24px;
+  border-radius: 20px;
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.readiness__panel h3 {
+  font-size: 1.08rem;
   margin-bottom: 8px;
+  color: var(--color-ink);
 }
 
-.readiness__card p {
-  position: relative;
-  z-index: 1;
+.readiness__panel p {
   font-size: 0.9rem;
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+}
+
+/* ---- Closing + wave ---- */
+.readiness__closing {
+  max-width: 780px;
+  margin: 48px auto 0;
+  text-align: center;
+}
+
+.readiness__closing p {
+  font-size: 0.98rem;
 }
 
 .readiness__wave {
@@ -147,9 +244,17 @@
 }
 
 @media (min-width: 576px) {
-  .readiness__bento {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 20px;
+  /* two per row */
+  .readiness__card-wrap {
+    flex-basis: calc((100% - clamp(18px, 3vw, 26px)) / 2);
+  }
+}
+
+@media (min-width: 900px) {
+  /* three per row — the last row's leftover cards centre via the deck's
+     justify-content: center */
+  .readiness__card-wrap {
+    flex-basis: calc((100% - 2 * clamp(18px, 3vw, 26px)) / 3);
   }
 }
 
@@ -159,38 +264,9 @@
   }
 }
 
-@media (min-width: 992px) {
-  .readiness__bento {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .readiness__card--lg {
-    grid-column: span 2;
-  }
-  .readiness__card--full {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: flex-start;
-    gap: 28px;
-  }
-  .readiness__card--full .readiness__icon {
-    flex-shrink: 0;
-    margin-bottom: 0;
-  }
-  .readiness__card--full .readiness__card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .readiness__card--full h3 {
-    margin-bottom: 2px;
-  }
-  .readiness__card--full p {
-    max-width: 74ch;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .readiness__card {
+    transition: none;
     transform: none !important;
   }
 }

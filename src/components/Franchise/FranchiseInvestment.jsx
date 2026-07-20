@@ -94,13 +94,17 @@ export default function FranchiseInvestment() {
                 key={it.title}
                 className={`fr-invest__leg fr-invest__leg--${it.tone}`}
               >
-                <span className="fr-invest__leg-num">{i + 1}</span>
-                <span className="fr-invest__leg-copy">
-                  <h3>{it.title}</h3>
-                  <p>{it.text}</p>
+                <span className="fr-invest__leg-node" aria-hidden="true">
+                  <span className="fr-invest__leg-num">{i + 1}</span>
                 </span>
-                <span className="fr-invest__leg-chip">
-                  <it.icon size={16} strokeWidth={2} />
+                <span className="fr-invest__leg-card">
+                  <span className="fr-invest__leg-tab" aria-hidden="true">
+                    <it.icon size={17} strokeWidth={2} />
+                  </span>
+                  <span className="fr-invest__leg-copy">
+                    <h3>{it.title}</h3>
+                    <p>{it.text}</p>
+                  </span>
                 </span>
               </Reveal>
             ))}

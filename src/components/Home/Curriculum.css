@@ -71,6 +71,18 @@
   border-radius: var(--radius-pill);
   box-shadow: var(--shadow-lift);
   z-index: 2;
+  animation: curr-chip-float 4s ease-in-out infinite;
+}
+
+@keyframes curr-chip-float {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(-4deg) translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curriculum__chip {
+    animation: none;
+  }
 }
 
 .curriculum__chip svg {

@@ -200,16 +200,6 @@
 /* ==========================================================================
    Responsive
    ========================================================================== */
-/* Phone/tablet-portrait: cards stack single-column, so keep them upright
-   instead of the playful tilt (which reads as misaligned on narrow screens).
-   framer-motion applies the tilt as an inline transform, so override with
-   !important. The tilt returns at >=860px where the cards sit side-by-side. */
-@media (max-width: 859.98px) {
-  .fcard {
-    transform: none !important;
-  }
-}
-
 @media (min-width: 860px) {
   .founders__grid {
     grid-template-columns: repeat(2, 1fr);
@@ -235,9 +225,9 @@
     min-height: 8.25rem;
   }
 
-  /* Anchor the bio to the bottom: extra height becomes even spacing, not a bottom void */
+  /* Let content flow from the top so the shorter card's extra height falls as
+     empty space at the bottom, rather than a gap between the quote and bio. */
   .fcard__bios {
-    margin-top: auto;
     padding-top: 8px;
   }
 }

@@ -55,6 +55,11 @@
 .navbar__logo {
   height: 58px;
   width: auto;
+  transition: transform var(--dur-med) var(--ease-premium);
+}
+
+.navbar__brand:hover .navbar__logo {
+  transform: scale(1.05) rotate(-2deg);
 }
 
 .navbar__links {

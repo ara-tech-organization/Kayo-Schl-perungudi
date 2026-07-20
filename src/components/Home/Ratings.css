@@ -61,6 +61,12 @@
   background: var(--color-gold);
   color: var(--color-primary-dark);
   margin-bottom: 4px;
+  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium);
+}
+
+.ratings__card:hover .ratings__icon {
+  transform: scale(1.14) rotate(-10deg);
+  box-shadow: 0 8px 18px -6px rgba(248, 188, 38, 0.7);
 }
 
 .ratings__card strong {

@@ -139,8 +139,12 @@ export default function GalleryPreview() {
 
       <div
         className="gallery-preview__stage"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        onPointerEnter={(e) => {
+          if (e.pointerType === "mouse") setPaused(true);
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "mouse") setPaused(false);
+        }}
       >
         <div className="gallery-preview__floor" aria-hidden="true" />
         <div className="gallery-preview__coverflow">

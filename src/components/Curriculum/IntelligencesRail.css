@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Multiple Intelligences — colourful sticker picker + playful detail card
+   Multiple Intelligences — playful orbit: 8 planets circling a morphing hub
    ========================================================================== */
-.mi-showcase {
+.mi-orbit {
   position: relative;
   padding: var(--section-pad) 0;
   overflow: hidden;
@@ -9,227 +9,297 @@
   background: linear-gradient(180deg, var(--color-bg-alt) 0%, var(--color-bg) 100%);
 }
 
-.mi-showcase .container {
+.mi-orbit .container {
   position: relative;
   z-index: 1;
 }
 
-.mi-showcase__layout {
-  margin-top: 36px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.mi-showcase__closing {
-  max-width: 780px;
-  margin: 40px auto 0;
-  text-align: center;
-}
-
-.mi-showcase__closing p {
-  font-size: 0.98rem;
-}
-
-/* ---- Picker chips ---- */
-.mi-showcase__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-.mi-showcase__pick {
+.mi-orbit__stage {
   --tone: var(--color-primary);
   --tone-dark: var(--color-primary-dark);
   --tone-soft: var(--color-primary-light);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: left;
-  padding: 12px 14px;
-  min-height: 72px;
-  border-radius: 18px;
-  background: var(--color-surface);
-  border: 2px solid var(--tone-soft);
-  cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease-premium), background var(--dur-fast) var(--ease-premium),
-    transform var(--dur-fast) var(--ease-premium), box-shadow var(--dur-fast) var(--ease-premium);
-}
-
-.mi-showcase__pick--secondary { --tone: var(--color-secondary-dark); --tone-dark: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
-.mi-showcase__pick--gold { --tone: var(--color-gold); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
-.mi-showcase__pick--orange { --tone: var(--color-orange); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
-
-.mi-showcase__pick:hover {
-  transform: translateY(-3px);
-  border-color: var(--tone);
-  box-shadow: 4px 6px 0 -1px var(--tone-soft);
-}
-
-.mi-showcase__pick.is-active {
-  background: var(--tone);
-  border-color: var(--tone);
-  box-shadow: 4px 7px 0 -1px var(--tone-soft);
-}
-
-.mi-showcase__pick-icon {
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
-  background: var(--tone-soft);
-  color: var(--tone-dark);
-  transition: background var(--dur-fast) var(--ease-premium), color var(--dur-fast) var(--ease-premium);
-}
-
-.mi-showcase__pick.is-active .mi-showcase__pick-icon {
-  background: rgba(255, 255, 255, 0.24);
-  color: #fff;
-}
-
-.mi-showcase__pick-text {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  min-width: 0;
+  align-items: center;
+  gap: 28px;
 }
 
-.mi-showcase__pick-text strong {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
+.mi-orbit__stage--secondary { --tone: var(--color-secondary); --tone-dark: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
+.mi-orbit__stage--gold { --tone: var(--color-gold); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
+.mi-orbit__stage--orange { --tone: var(--color-orange); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
+
+/* ---- The orbit ring ---- */
+.mi-orbit__ring {
+  --ring: clamp(300px, 84vw, 460px);
+  --node: clamp(52px, 14vw, 68px);
+  --radius: calc(var(--ring) / 2 - var(--node) / 2);
+  position: relative;
+  flex: 0 0 auto;
+  width: var(--ring);
+  height: var(--ring);
+}
+
+/* Dashed planetary track that slowly spins */
+.mi-orbit__track {
+  position: absolute;
+  inset: calc(var(--node) / 2 - 4px);
+  border-radius: 50%;
+  border: 2px dashed var(--tone-soft);
+  animation: mi-spin 40s linear infinite;
+}
+
+.mi-orbit__track--inner {
+  inset: calc(var(--node) / 2 + 26px);
+  border-style: dotted;
+  border-color: var(--tone);
+  opacity: 0.3;
+  animation-duration: 55s;
+  animation-direction: reverse;
+}
+
+@keyframes mi-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Orbiting planet buttons ---- */
+.mi-orbit__node {
+  --tone: var(--color-primary);
+  --tone-dark: var(--color-primary-dark);
+  --tone-soft: var(--color-primary-light);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--node);
+  height: var(--node);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateY(calc(var(--radius) * -1))
+    rotate(calc(var(--angle) * -1));
+}
+
+.mi-orbit__node--secondary { --tone: var(--color-secondary-dark); --tone-dark: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
+.mi-orbit__node--gold { --tone: var(--color-gold); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
+.mi-orbit__node--orange { --tone: var(--color-orange); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
+
+.mi-orbit__node-bob {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: mi-bob 5s ease-in-out infinite;
+  animation-delay: var(--bob-delay, 0s);
+}
+
+@keyframes mi-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.mi-orbit__bubble {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--tone-soft);
+  color: var(--tone-dark);
+  box-shadow: 3px 4px 0 -1px var(--tone-soft);
+  transition: transform var(--dur-fast) var(--ease-premium), background var(--dur-fast) var(--ease-premium),
+    border-color var(--dur-fast) var(--ease-premium), color var(--dur-fast) var(--ease-premium),
+    box-shadow var(--dur-fast) var(--ease-premium);
+}
+
+.mi-orbit__bubble svg {
+  width: 40%;
+  height: 40%;
+}
+
+.mi-orbit__bubble small {
+  font-size: 0.56rem;
   font-weight: 700;
-  line-height: 1.2;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.mi-orbit__node:hover .mi-orbit__bubble,
+.mi-orbit__node:focus-visible .mi-orbit__bubble {
+  transform: scale(1.12);
+  border-color: var(--tone);
+}
+
+.mi-orbit__node:focus-visible .mi-orbit__bubble {
+  outline: 2px solid var(--tone-dark);
+  outline-offset: 2px;
+}
+
+.mi-orbit__node.is-active .mi-orbit__bubble {
+  background: var(--tone);
+  border-color: var(--tone);
+  color: #fff;
+  box-shadow: 4px 6px 0 -1px var(--tone-soft);
+  transform: scale(1.16);
+}
+
+/* ---- Center hub — morphs to the active intelligence ---- */
+.mi-orbit__hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(150px, 46%, 196px);
+  height: clamp(150px, 46%, 196px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: var(--color-surface);
+  border: 3px solid var(--tone);
+  box-shadow: 0 12px 30px -12px var(--tone), inset 0 0 0 6px var(--tone-soft);
+  transition: border-color 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
+}
+
+.mi-orbit__hub-glow {
+  position: absolute;
+  inset: -12px;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--tone-soft) 0%, transparent 68%);
+  animation: mi-pulse 2.8s var(--ease-premium) infinite;
+}
+
+@keyframes mi-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.14); opacity: 0.9; }
+}
+
+.mi-orbit__hub-inner {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 14px;
+}
+
+.mi-orbit__hub-count {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--tone-dark);
+  opacity: 0.7;
+}
+
+.mi-orbit__hub-count small {
+  font-size: 0.68rem;
+}
+
+.mi-orbit__hub-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 4px 0 8px;
+  border-radius: 50%;
+  background: var(--tone-soft);
+  color: var(--tone-dark);
+}
+
+.mi-orbit__hub-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.mi-orbit__hub-title {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.15;
   color: var(--color-ink);
 }
 
-.mi-showcase__pick-text small {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--color-ink-faint);
-}
-
-.mi-showcase__pick.is-active .mi-showcase__pick-text strong,
-.mi-showcase__pick.is-active .mi-showcase__pick-text small {
-  color: #fff;
-}
-.mi-showcase__pick.is-active .mi-showcase__pick-text small {
-  opacity: 0.85;
-}
-
-/* ---- Detail stage ---- */
-.mi-showcase__stage {
-  position: relative;
-  min-height: 300px;
-}
-
-.mi-showcase__detail {
-  --tone: var(--color-primary);
-  --tone-dark: var(--color-primary-dark);
-  --tone-soft: var(--color-primary-light);
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  padding: clamp(24px, 5vw, 34px) clamp(20px, 5vw, 30px);
-  border-radius: var(--radius-lg);
-  background: var(--color-surface);
-  border: 2px solid var(--tone);
-  box-shadow: 8px 12px 0 -2px var(--tone-soft);
-}
-
-.mi-showcase__detail--secondary { --tone: var(--color-secondary); --tone-dark: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
-.mi-showcase__detail--gold { --tone: var(--color-gold); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
-.mi-showcase__detail--orange { --tone: var(--color-orange); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
-
-.mi-showcase__detail-index {
-  position: absolute;
-  top: 18px;
-  right: 26px;
-  font-family: var(--font-display);
-  font-size: 2.8rem;
-  line-height: 1;
-  color: var(--tone-soft);
-  z-index: 0;
-}
-
-.mi-showcase__detail-index small {
-  font-size: 1.1rem;
-}
-
-.mi-showcase__detail-icon {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 62px;
-  height: 62px;
-  border-radius: 18px;
-  margin-bottom: 18px;
-  background: var(--tone-soft);
-  color: var(--tone-dark);
-}
-
-.mi-showcase__detail-tag {
-  position: relative;
-  z-index: 1;
-  display: inline-block;
-  font-size: 0.74rem;
+.mi-orbit__hub-tag {
+  margin-top: 3px;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--tone-dark);
-  margin-bottom: 8px;
 }
 
-.mi-showcase__detail h3 {
+/* ---- Speech-bubble caption ---- */
+.mi-orbit__caption {
   position: relative;
-  z-index: 1;
-  font-size: 1.5rem;
-  margin-bottom: 14px;
+  width: min(100%, 480px);
+  padding: 22px 26px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 2px solid var(--tone-soft);
+  box-shadow: 6px 8px 0 -2px var(--tone-soft);
 }
 
-.mi-showcase__detail p {
-  position: relative;
-  z-index: 1;
+/* little pointer up towards the orbit */
+.mi-orbit__caption::before {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateX(-50%) rotate(45deg);
+  background: var(--color-surface);
+  border-left: 2px solid var(--tone-soft);
+  border-top: 2px solid var(--tone-soft);
+}
+
+.mi-orbit__caption p {
+  margin: 0;
   font-size: 1rem;
-  max-width: 56ch;
+  text-align: center;
 }
 
-@media (min-width: 576px) {
-  .mi-showcase__layout {
-    margin-top: 44px;
-    gap: 22px;
-  }
-  .mi-showcase__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.mi-orbit__closing {
+  max-width: 780px;
+  margin: 44px auto 0;
+  text-align: center;
 }
 
-@media (min-width: 768px) {
-  .mi-showcase__stage {
-    min-height: 250px;
-  }
+.mi-orbit__closing p {
+  font-size: 0.98rem;
 }
 
+/* ---- Side-by-side on wide screens ---- */
 @media (min-width: 992px) {
-  .mi-showcase__layout {
+  .mi-orbit__stage {
     flex-direction: row;
-    align-items: stretch;
+    justify-content: center;
+    align-items: center;
+    gap: 44px;
   }
-  .mi-showcase__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    flex: 0 0 48%;
-    align-content: flex-start;
+
+  .mi-orbit__caption {
+    width: 380px;
   }
-  .mi-showcase__stage {
-    flex: 1;
-    min-height: 300px;
+
+  /* pointer moves to the left edge, aiming at the orbit */
+  .mi-orbit__caption::before {
+    top: 50%;
+    left: -11px;
+    transform: translateY(-50%) rotate(-45deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mi-showcase__pick {
-    transform: none !important;
+  .mi-orbit__track,
+  .mi-orbit__node-bob,
+  .mi-orbit__hub-glow {
+    animation: none;
+  }
+  .mi-orbit__bubble {
+    transition: none;
   }
 }

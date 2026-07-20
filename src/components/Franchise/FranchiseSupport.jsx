@@ -2,54 +2,32 @@ import { motion } from "framer-motion";
 import {
   ClipboardList,
   Compass,
+  HeartHandshake,
   Megaphone,
   NotebookPen,
   Sparkles,
-  Star,
   UsersRound,
 } from "lucide-react";
 import SectionHeading from "../common/SectionHeading";
 import FloatingShapes from "../common/FloatingShapes";
 import "./FranchiseSupport.css";
-import supportImg from "../../assets/Francis.png";
 
 const SHAPES = [
-  { type: "star", color: "var(--color-gold)", size: 28, top: "22%", right: "5%", speed: 0.38, float: 18, dur: 6, rotate: 16 },
-  { type: "dot", color: "var(--color-secondary)", size: 18, bottom: "16%", left: "6%", speed: 0.48, float: 20, dur: 6, opacity: 0.6 },
+  { type: "star", color: "var(--color-gold)", size: 28, top: "18%", right: "5%", speed: 0.38, float: 18, dur: 6, rotate: 16 },
+  { type: "dot", color: "var(--color-secondary)", size: 18, bottom: "14%", left: "6%", speed: 0.48, float: 20, dur: 6, opacity: 0.6 },
+  { type: "plus", color: "var(--color-orange)", size: 20, top: "28%", left: "4%", speed: 0.42, float: 14, dur: 5, opacity: 0.7 },
+  { type: "cloud", color: "var(--color-surface)", size: 60, top: "10%", left: "42%", speed: 0.24, float: 14, dur: 9 },
 ];
 
 const SUPPORT = [
-  {
-    icon: Compass,
-    tone: "primary",
-    title: "Setup Guidance",
-    text: "End-to-end support choosing your location, designing your centre and preparing for launch.",
-  },
-  {
-    icon: NotebookPen,
-    tone: "secondary",
-    title: "Curriculum & Academics",
-    text: "Full access to our proprietary NURTURE Lab curriculum and academic planning resources.",
-  },
-  {
-    icon: UsersRound,
-    tone: "gold",
-    title: "Teacher Training",
-    text: "Help hiring the right educators, plus structured training aligned to Kayo's teaching standards.",
-  },
-  {
-    icon: ClipboardList,
-    tone: "orange",
-    title: "Operations & Admin",
-    text: "Guidance on daily operations, administration, compliance and centre management systems.",
-  },
-  {
-    icon: Megaphone,
-    tone: "secondary",
-    title: "Marketing & Admissions",
-    text: "Launch campaigns, local marketing playbooks and admissions guidance to fill your centre.",
-  },
+  { icon: Compass, tone: "primary", title: "Setup Guidance", text: "Choosing your location, designing your centre and prepping for launch." },
+  { icon: NotebookPen, tone: "secondary", title: "Curriculum", text: "Full access to our NURTURE Lab curriculum and planning resources." },
+  { icon: UsersRound, tone: "gold", title: "Teacher Training", text: "Hiring the right educators and training them to Kayo's standards." },
+  { icon: ClipboardList, tone: "orange", title: "Operations", text: "Daily operations, admin, compliance and centre management." },
+  { icon: Megaphone, tone: "primary", title: "Marketing", text: "Launch campaigns and admissions playbooks to fill your centre." },
 ];
+
+const BOB = [4.6, 5.2, 4.3, 5.5, 4.9];
 
 export default function FranchiseSupport() {
   return (
@@ -68,67 +46,72 @@ export default function FranchiseSupport() {
           align="center"
           eyebrow="You're Never Alone"
           title="Our Comprehensive Support System"
-          description="From the moment you sign on, our head office team works alongside you — covering every part of building and running a successful centre."
+          description="From the moment you sign on, our head office lifts every part of your journey — from setup to admissions."
         />
 
-        <div className="fr-support__hub">
-          <motion.span
-            className="fr-support__spark fr-support__spark--a"
-            aria-hidden="true"
-            animate={{ y: [0, -10, 0], rotate: [0, 12, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Sparkles size={16} strokeWidth={1.8} />
-          </motion.span>
-          <motion.span
-            className="fr-support__spark fr-support__spark--b"
-            aria-hidden="true"
-            animate={{ y: [0, 10, 0], rotate: [0, -12, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-          >
-            <Star size={14} strokeWidth={1.8} fill="currentColor" />
-          </motion.span>
-
-          <motion.div
-            className="fr-support__center"
-            initial={{ opacity: 0, scale: 0.85 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ type: "spring", stiffness: 140, damping: 14 }}
-          >
-            <img
-              className="fr-support__center-img"
-              src={supportImg}
-              alt="Kayo International head office support team celebrating with franchise partners"
-            />
-            <span className="fr-support__center-scrim" aria-hidden="true" />
-            <div className="fr-support__center-cap">
-              <strong>Head Office Team</strong>
-              <span>With you at every step</span>
-            </div>
-          </motion.div>
-
+        <div className="fr-support__balloons">
           {SUPPORT.map((s, i) => (
-            <motion.article
-              className={`fr-support__card fr-support__card--${s.tone} fr-support__card--p${i}`}
+            <motion.div
               key={s.title}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              className="fr-support__cell"
+              initial={{ opacity: 0, y: 54, scale: 0.8 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ type: "spring", stiffness: 130, damping: 15, delay: 0.1 + i * 0.08 }}
-              whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 18 } }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ type: "spring", stiffness: 120, damping: 14, delay: (i % 5) * 0.08 }}
             >
-              <span className="fr-support__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-              <span className="fr-support__icon">
-                <s.icon strokeWidth={1.7} />
-              </span>
-              <div>
+              <motion.article
+                className={`fr-support__balloon fr-support__balloon--${s.tone}`}
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: BOB[i], repeat: Infinity, ease: "easeInOut" }}
+                whileHover={{ scale: 1.07 }}
+              >
+                <span className="fr-support__shine" aria-hidden="true" />
+                <span className="fr-support__num" aria-hidden="true">{i + 1}</span>
+                <span className="fr-support__balloon-icon">
+                  <s.icon strokeWidth={1.8} />
+                </span>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
-              </div>
-            </motion.article>
+                <span className="fr-support__knot" aria-hidden="true" />
+                <span className="fr-support__string" aria-hidden="true" />
+              </motion.article>
+            </motion.div>
           ))}
         </div>
+
+        <motion.div
+          className="fr-support__ground"
+          initial={{ opacity: 0, y: 26 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span className="fr-support__bunting" aria-hidden="true">
+            <i /><i /><i /><i /><i /><i /><i /><i /><i /><i />
+          </span>
+          <span className="fr-support__ground-pattern" aria-hidden="true" />
+
+          <span className="fr-support__confetti fr-support__confetti--a" aria-hidden="true" />
+          <span className="fr-support__confetti fr-support__confetti--b" aria-hidden="true" />
+          <span className="fr-support__confetti fr-support__confetti--c" aria-hidden="true" />
+
+          <div className="fr-support__ground-copy">
+            <span className="fr-support__ground-badge">
+              <HeartHandshake size={15} strokeWidth={2} /> Our Head Office Team
+            </span>
+            <strong>We hold every balloon up with you!</strong>
+            <p>Whatever you need to grow your centre, our friendly team is right there holding it up with you.</p>
+          </div>
+
+          <motion.span
+            className="fr-support__ground-spark"
+            aria-hidden="true"
+            animate={{ y: [0, -8, 0], rotate: [0, 12, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Sparkles size={18} strokeWidth={1.8} />
+          </motion.span>
+        </motion.div>
       </div>
     </section>
   );

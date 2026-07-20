@@ -117,10 +117,10 @@ export default function OurStory() {
               <motion.div
                 className={`story__stop story__stop--${m.tone}`}
                 key={m.year}
-                initial={{ opacity: 0, y: 26, scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                initial={{ opacity: 0, y: i % 2 === 0 ? 40 : -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.5 }}
-                transition={{ type: "spring", stiffness: 130, damping: 14, delay: i * 0.08 }}
+                transition={{ duration: 0.6, ease: EASE, delay: (i % 2) * 0.12 }}
               >
                 <div className="story__stop-card">
                   <span className="story__stop-num" aria-hidden="true">

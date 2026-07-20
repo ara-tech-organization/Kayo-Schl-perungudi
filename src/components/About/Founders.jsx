@@ -65,8 +65,8 @@ export default function Founders() {
             <motion.article
               key={f.name}
               className={`fcard fcard--${f.tone}`}
-              initial={{ opacity: 0, y: 46, rotate: f.tilt * 2.5, scale: 0.94 }}
-              whileInView={{ opacity: 1, y: 0, rotate: f.tilt, scale: 1 }}
+              initial={{ opacity: 0, y: 46, scale: 0.94 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ type: "spring", stiffness: 110, damping: 15, delay: i * 0.1 }}
               whileHover={{ rotate: 0, y: -10, transition: { type: "spring", stiffness: 260, damping: 18 } }}
