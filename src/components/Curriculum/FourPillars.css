@@ -81,8 +81,10 @@
   background: rgba(255, 255, 255, 0.55);
   border: 1px dashed rgba(38, 35, 29, 0.18);
   transform: rotate(6deg);
+  transform-origin: center;
   border-radius: 3px;
   z-index: 2;
+  animation: pillar-tape-wiggle 5s ease-in-out infinite;
 }
 
 .pillars__icon {
@@ -99,6 +101,62 @@
 .pillars__icon svg {
   width: 28px;
   height: 28px;
+  animation: pillar-icon-float 4.5s ease-in-out infinite;
+}
+
+/* Twinkling sticker sparkle */
+.pillars__card::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 14px;
+  height: 14px;
+  background: var(--tone);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: pillar-twinkle 3.6s ease-in-out infinite;
+  z-index: 2;
+}
+
+.pillars__card--featured::after {
+  background: var(--color-gold);
+}
+
+/* ---- Playful group-hover reactions ---- */
+.pillars__num,
+.pillars__tape {
+  transition: transform var(--dur-fast) var(--ease-premium);
+}
+
+.pillars__card:hover .pillars__num {
+  transform: rotate(4deg) scale(1.12) !important;
+}
+
+.pillars__card:hover .pillars__tape {
+  transform: rotate(-5deg) scale(1.06);
+}
+
+.pillars__card:hover::after {
+  opacity: 1;
+  transform: scale(1.25) rotate(24deg);
+}
+
+/* ---- Idle keyframe accents (gentle) ---- */
+@keyframes pillar-tape-wiggle {
+  0%, 100% { transform: rotate(6deg); }
+  50% { transform: rotate(2.5deg); }
+}
+
+@keyframes pillar-icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pillar-twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.7) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(20deg); }
 }
 
 .pillars__card h3 {
@@ -188,5 +246,10 @@
 @media (prefers-reduced-motion: reduce) {
   .pillars__card {
     transform: none !important;
+  }
+  .pillars__tape,
+  .pillars__icon svg,
+  .pillars__card::after {
+    animation: none !important;
   }
 }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Curriculum Hero — warm, playful, built around the NURTURE letter tiles
+   Curriculum Hero — copy + interactive NURTURE toy-block play-mat (no image)
    ========================================================================== */
 .curr-hero {
   position: relative;
@@ -32,17 +32,25 @@
   background-size: 24px 24px;
 }
 
+/* ---- Two-column shell ---- */
 .curr-hero__inner {
   position: relative;
   z-index: 1;
-  max-width: 920px;
+  max-width: 1140px;
   margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(30px, 5vw, 54px);
+  padding: 16px 0 44px;
+}
+
+/* ---- Left: copy ---- */
+.curr-hero__copy {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: flex-start;
   gap: 16px;
-  padding: 12px 0 40px;
 }
 
 .curr-hero__crumb {
@@ -66,14 +74,10 @@
   color: var(--color-primary-dark);
 }
 
-.curr-hero__eyebrow {
-  justify-content: center;
-}
-
 .curr-hero__title {
-  font-size: clamp(1.9rem, 4.4vw, 2.9rem);
-  max-width: 20ch;
-  line-height: 1.16;
+  font-size: clamp(2rem, 4.6vw, 3rem);
+  max-width: 16ch;
+  line-height: 1.14;
 }
 
 .curr-hero__mark {
@@ -97,109 +101,186 @@
 
 .curr-hero__lead {
   font-size: 1.02rem;
-  max-width: 66ch;
+  max-width: 60ch;
 }
 
-.curr-hero__lead--muted {
-  font-size: 0.96rem;
-  color: var(--color-ink-faint);
+/* founder note card */
+.curr-hero__founder {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  max-width: 58ch;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-soft);
+  box-shadow: var(--shadow-pop);
 }
 
-.curr-hero__name-lead {
-  margin-top: 8px;
+.curr-hero__founder-badge {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.curr-hero__founder p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+.curr-hero__founder strong {
+  color: var(--color-primary-dark);
+}
+
+/* ==========================================================================
+   Right: block play-mat
+   ========================================================================== */
+.curr-hero__stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: clamp(26px, 4vw, 40px) clamp(18px, 3.5vw, 32px);
+  border-radius: 30px;
+  background: var(--color-surface);
+  border: 2px dashed var(--color-primary-light);
+  box-shadow: var(--shadow-pop);
+}
+
+.curr-hero__stage-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: var(--color-gold-light);
+  color: var(--color-orange-dark);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.curr-hero__stage-title {
   font-family: var(--font-display);
   font-size: 1.05rem;
   color: var(--color-ink);
+  text-align: center;
 }
 
-.curr-hero__name-lead strong {
+.curr-hero__stage-title strong {
   color: var(--color-primary-dark);
   letter-spacing: 0.08em;
 }
 
-/* ---- NURTURE letter tiles ---- */
-.curr-hero__letters {
+/* ---- Toy blocks ---- */
+.curr-hero__blocks {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin-top: 12px;
 }
 
-.curr-hero__letter {
+.curr-hero__block {
   --tone: var(--color-primary);
+  --tone-dark: var(--color-primary-dark);
   --tone-soft: var(--color-primary-light);
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  width: 56px;
+  width: 60px;
   padding: 0;
-  background: none;
   border: none;
+  background: none;
   cursor: pointer;
 }
 
-.curr-hero__letter--primary { --tone: var(--color-primary); --tone-soft: var(--color-primary-light); }
-.curr-hero__letter--secondary { --tone: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
-.curr-hero__letter--gold { --tone: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
-.curr-hero__letter--orange { --tone: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
+.curr-hero__block--primary { --tone: var(--color-primary); --tone-dark: var(--color-primary-dark); --tone-soft: var(--color-primary-light); }
+.curr-hero__block--secondary { --tone: var(--color-secondary); --tone-dark: var(--color-secondary-dark); --tone-soft: var(--color-secondary-light); }
+.curr-hero__block--gold { --tone: var(--color-gold); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-gold-light); }
+.curr-hero__block--orange { --tone: var(--color-orange); --tone-dark: var(--color-orange-dark); --tone-soft: var(--color-orange-light); }
 
-.curr-hero__letter-glyph {
-  width: 52px;
-  height: 52px;
+/* the physical 3D block face */
+.curr-hero__block-face {
   display: grid;
   place-items: center;
+  width: 60px;
+  height: 60px;
   border-radius: 16px;
-  background: var(--color-surface);
-  border: 2px solid var(--tone);
-  box-shadow: 4px 5px 0 -1px var(--tone-soft);
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--tone);
-  transform: rotate(var(--glyph-tilt, 0deg));
-  transition: transform var(--dur-med) var(--ease-premium), box-shadow var(--dur-med) var(--ease-premium),
-    background var(--dur-med) var(--ease-premium), color var(--dur-med) var(--ease-premium);
-}
-
-.curr-hero__letter:nth-child(odd) .curr-hero__letter-glyph { --glyph-tilt: -4deg; }
-.curr-hero__letter:nth-child(even) .curr-hero__letter-glyph { --glyph-tilt: 4deg; }
-
-.curr-hero__letter.is-active .curr-hero__letter-glyph {
-  transform: rotate(0deg) translateY(-8px) scale(1.08);
   background: var(--tone);
   color: #fff;
-  box-shadow: 6px 9px 0 -1px var(--tone-soft);
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  box-shadow: 0 6px 0 0 var(--tone-dark),
+    0 12px 16px -8px color-mix(in srgb, var(--tone) 55%, transparent);
+  transition: box-shadow var(--dur-med) var(--ease-premium);
+  /* gentle idle bob (the parent button owns the hover jump & wiggle) */
+  animation: hero-bob 5s ease-in-out infinite;
+  animation-delay: var(--bob-delay, 0s);
 }
 
-.curr-hero__letter-word {
-  font-size: 0.68rem;
+.curr-hero__block:nth-child(odd) .curr-hero__block-face { --tilt: -5deg; }
+.curr-hero__block:nth-child(even) .curr-hero__block-face { --tilt: 5deg; }
+
+@keyframes hero-bob {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  50% { transform: translateY(-5px) rotate(var(--tilt, 0deg)); }
+}
+
+.curr-hero__block:hover .curr-hero__block-face,
+.curr-hero__block.is-active .curr-hero__block-face {
+  box-shadow: 0 10px 0 0 var(--tone-dark),
+    0 20px 24px -8px color-mix(in srgb, var(--tone) 60%, transparent);
+}
+
+.curr-hero__block:focus-visible .curr-hero__block-face {
+  outline: 3px solid var(--tone-dark);
+  outline-offset: 3px;
+}
+
+.curr-hero__block-word {
+  font-size: 0.66rem;
   font-weight: 700;
+  max-width: 80px;
+  text-align: center;
+  line-height: 1.2;
   color: var(--color-ink-faint);
   opacity: 0;
   transform: translateY(-4px);
   transition: opacity var(--dur-fast) var(--ease-premium), transform var(--dur-fast) var(--ease-premium),
     color var(--dur-fast) var(--ease-premium);
-  max-width: 88px;
-  text-align: center;
-  line-height: 1.2;
 }
 
-.curr-hero__letter.is-active .curr-hero__letter-word {
+.curr-hero__block:hover .curr-hero__block-word,
+.curr-hero__block.is-active .curr-hero__block-word {
   opacity: 1;
   transform: translateY(0);
-  color: var(--tone);
+  color: var(--tone-dark);
 }
 
-.curr-hero__letters-caption {
-  margin-top: 8px;
+/* dynamic reveal line */
+.curr-hero__reveal {
+  min-height: 1.7em;
+  max-width: 34ch;
+  text-align: center;
   font-family: var(--font-accent);
-  font-size: clamp(1.05rem, 3.4vw, 1.25rem);
+  font-size: clamp(1rem, 3vw, 1.2rem);
   color: var(--color-primary);
-  max-width: 40ch;
 }
 
+.curr-hero__reveal b {
+  color: var(--color-primary-dark);
+}
+
+/* ---- Wave ---- */
 .curr-hero__wave {
   position: relative;
   z-index: 1;
@@ -209,23 +290,22 @@
 }
 
 @media (min-width: 576px) {
-  .curr-hero__letter {
-    width: 68px;
+  .curr-hero__blocks {
+    gap: 14px;
   }
-  .curr-hero__letter-glyph {
-    width: 60px;
-    height: 60px;
-    border-radius: 18px;
-    font-size: 1.7rem;
+  .curr-hero__block {
+    width: 66px;
+  }
+  .curr-hero__block-face {
+    width: 66px;
+    height: 66px;
+    font-size: 2.1rem;
   }
 }
 
 @media (min-width: 768px) {
   .curr-hero {
     padding-top: 24px;
-  }
-  .curr-hero__letters {
-    gap: 14px;
   }
   .curr-hero__wave {
     height: 70px;
@@ -234,10 +314,62 @@
 
 @media (min-width: 992px) {
   .curr-hero__inner {
-    gap: 18px;
-    padding-bottom: 48px;
+    grid-template-columns: 1.02fr 0.98fr;
+    padding-bottom: 52px;
   }
-  .curr-hero__letters {
-    gap: 16px;
+}
+
+/* ---- Additive decorative accents (layered onto the hero) ---- */
+.curr-hero__mesh {
+  transform-origin: 50% 40%;
+  animation: curr-mesh-pulse 16s ease-in-out infinite;
+}
+
+.curr-hero__eyebrow svg {
+  transform-origin: center;
+  animation: curr-sparkle 3.2s ease-in-out infinite;
+}
+
+.curr-hero__mark::after {
+  transform-origin: center;
+  animation: curr-mark-wiggle 5.5s ease-in-out infinite;
+}
+
+.curr-hero__twinkle {
+  animation: curr-twinkle 2.6s ease-in-out infinite;
+}
+
+@keyframes curr-mesh-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 0.86; transform: scale(1.04); }
+}
+
+@keyframes curr-sparkle {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+  50% { transform: rotate(90deg) scale(1.18); opacity: 0.72; }
+}
+
+@keyframes curr-mark-wiggle {
+  0%, 100% { transform: rotate(-1.2deg); }
+  50% { transform: rotate(1.4deg); }
+}
+
+@keyframes curr-twinkle {
+  0%, 100% { opacity: 0.9; filter: drop-shadow(0 0 0 transparent); }
+  50% { opacity: 0.4; filter: drop-shadow(0 0 6px currentColor); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .curr-hero__block,
+  .curr-hero__block-face,
+  .curr-hero__mesh,
+  .curr-hero__eyebrow svg,
+  .curr-hero__mark::after,
+  .curr-hero__twinkle {
+    animation: none;
+  }
+  .curr-hero__block-face,
+  .curr-hero__block-word {
+    transition: none;
   }
 }

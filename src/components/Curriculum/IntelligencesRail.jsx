@@ -27,6 +27,10 @@ const SHAPES = [
   { type: "triangle", color: "var(--color-primary-light)", size: 30, bottom: "10%", right: "24%", speed: 0.3, float: 22, dur: 8, rotate: 18, opacity: 0.6 },
   { type: "squiggle", color: "var(--color-orange)", size: 74, top: "44%", right: "3%", speed: 0.5, float: 14, dur: 7, opacity: 0.5 },
   { type: "ring", color: "var(--color-primary)", size: 40, bottom: "34%", left: "3%", speed: 0.4, float: 20, dur: 9, opacity: 0.5 },
+  { type: "ring", color: "var(--color-secondary)", size: 28, top: "8%", left: "22%", speed: 0.28, float: 14, dur: 8, rotate: 12, opacity: 0.42 },
+  { type: "dot", color: "var(--color-gold)", size: 12, top: "58%", left: "13%", speed: 0.46, float: 16, dur: 5, opacity: 0.5 },
+  { type: "star", color: "var(--color-orange)", size: 16, bottom: "8%", left: "42%", speed: 0.36, float: 18, dur: 6, spin: true, opacity: 0.5 },
+  { type: "plus", color: "var(--color-primary)", size: 18, top: "40%", left: "1%", speed: 0.4, float: 16, dur: 7, rotate: -16, opacity: 0.4 },
 ];
 
 const TONES = ["primary", "secondary", "gold", "orange"];
@@ -113,6 +117,11 @@ export default function IntelligencesRail() {
             <span className="mi-orbit__track" aria-hidden="true" />
             <span className="mi-orbit__track mi-orbit__track--inner" aria-hidden="true" />
 
+            {/* Twinkling accent sparkles around the hub */}
+            <span className="mi-orbit__spark mi-orbit__spark--1" aria-hidden="true" />
+            <span className="mi-orbit__spark mi-orbit__spark--2" aria-hidden="true" />
+            <span className="mi-orbit__spark mi-orbit__spark--3" aria-hidden="true" />
+
             {INTELLIGENCES.map((mi, i) => (
               <button
                 type="button"
@@ -120,7 +129,11 @@ export default function IntelligencesRail() {
                 role="tab"
                 aria-selected={active === i}
                 aria-label={`${mi.title} — ${mi.tag}`}
-                style={{ "--angle": `${i * STEP}deg`, "--bob-delay": `${i * -0.55}s` }}
+                style={{
+                  "--angle": `${i * STEP}deg`,
+                  "--bob-delay": `${i * -0.55}s`,
+                  "--enter-delay": `${0.35 + i * 0.06}s`,
+                }}
                 className={`mi-orbit__node mi-orbit__node--${TONES[i % TONES.length]} ${
                   active === i ? "is-active" : ""
                 }`}

@@ -380,16 +380,8 @@
   }
 
   .fr-support__ground {
-    flex-direction: row;
-    text-align: left;
-    gap: 26px;
-    padding: 30px 40px;
+    padding: 46px 40px 34px;
     margin-top: 34px;
-  }
-
-  .fr-support__ground-photo {
-    width: 110px;
-    height: 110px;
   }
 }
 

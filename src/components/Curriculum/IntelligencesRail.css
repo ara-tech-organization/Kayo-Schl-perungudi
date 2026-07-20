@@ -98,6 +98,7 @@
 }
 
 .mi-orbit__bubble {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,6 +114,16 @@
   transition: transform var(--dur-fast) var(--ease-premium), background var(--dur-fast) var(--ease-premium),
     border-color var(--dur-fast) var(--ease-premium), color var(--dur-fast) var(--ease-premium),
     box-shadow var(--dur-fast) var(--ease-premium);
+  /* staggered pop-in entrance (backwards fill keeps it hidden until its turn,
+     then reverts to normal so hover/active transforms stay in charge) */
+  animation: mi-pop-in 0.55s var(--ease-premium) backwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+@keyframes mi-pop-in {
+  0% { opacity: 0; transform: scale(0.2) rotate(-24deg); }
+  70% { transform: scale(1.08) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
 }
 
 .mi-orbit__bubble svg {
@@ -144,6 +155,49 @@
   color: #fff;
   box-shadow: 4px 6px 0 -1px var(--tone-soft);
   transform: scale(1.16);
+}
+
+/* Animated halo ring that radiates from the selected node */
+.mi-orbit__node .mi-orbit__bubble::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--tone);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mi-orbit__node.is-active .mi-orbit__bubble::after {
+  animation: mi-active-ring 1.8s var(--ease-premium) infinite;
+}
+
+@keyframes mi-active-ring {
+  0% { opacity: 0.7; transform: scale(1); }
+  70% { opacity: 0; transform: scale(1.55); }
+  100% { opacity: 0; transform: scale(1.55); }
+}
+
+/* ---- Twinkling accent sparkles floating around the hub ---- */
+.mi-orbit__spark {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  color: var(--tone);
+  background: currentColor;
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  opacity: 0;
+  pointer-events: none;
+  animation: mi-twinkle 3.4s var(--ease-premium) infinite;
+}
+
+.mi-orbit__spark--1 { top: 28%; left: 31%; --spark-scale: 1; animation-delay: 0s; }
+.mi-orbit__spark--2 { top: 25%; right: 29%; --spark-scale: 0.72; color: var(--color-gold); animation-delay: 1.1s; }
+.mi-orbit__spark--3 { bottom: 29%; left: 45%; --spark-scale: 0.85; color: var(--color-orange); animation-delay: 2.2s; }
+
+@keyframes mi-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 0.9; transform: scale(var(--spark-scale, 1)) rotate(90deg); }
 }
 
 /* ---- Center hub — morphs to the active intelligence ---- */
@@ -207,6 +261,12 @@
   border-radius: 50%;
   background: var(--tone-soft);
   color: var(--tone-dark);
+  animation: mi-breathe 3.6s ease-in-out infinite;
+}
+
+@keyframes mi-breathe {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.08) rotate(-3deg); }
 }
 
 .mi-orbit__hub-icon svg {
@@ -296,8 +356,15 @@
 @media (prefers-reduced-motion: reduce) {
   .mi-orbit__track,
   .mi-orbit__node-bob,
-  .mi-orbit__hub-glow {
+  .mi-orbit__hub-glow,
+  .mi-orbit__hub-icon,
+  .mi-orbit__spark,
+  .mi-orbit__node .mi-orbit__bubble,
+  .mi-orbit__node.is-active .mi-orbit__bubble::after {
     animation: none;
+  }
+  .mi-orbit__spark {
+    opacity: 0;
   }
   .mi-orbit__bubble {
     transition: none;
